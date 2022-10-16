@@ -13,3 +13,40 @@
  *= require_tree .
  *= require_self
  */
+ *{
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+ }
+ 
+.bg-header{
+  background-color: lightyellow;
+}
+
+.sidebar table th, .sidebar table td{
+  padding: 5px 20px;
+}
+
+
+
+#main_visual{
+  height: 300px;
+  background-image: url("/images/mv.jpg");
+  background-size: cover;
+  background-position: center;
+
+}
+
+#main_visual_text{
+  background-color: rgba(255, 255, 255, 0.6)
+}
+
+.item_list{
+  width: ;
+  flex-wrap: nowrap;
+}
+
+.item_box{
+  height: 150px;
+  width: 200px;
+}
