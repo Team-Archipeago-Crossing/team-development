@@ -10,12 +10,14 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="container">
     <header class="d-flex justify-content-between bg-header border-bottom">
       <div class="logo_area">
         <div class="logo px-5 py-3 m-2 h3 border border-success">
-          <%# ↓の代わりににlogoが入る予定 %>
-          <div>ＬＯＧＯ</div>
+          <%= link_to root_path do %>
+            <%# ↓の代わりににlogoが入る予定 %>
+            <div>ＬＯＧＯ</div>
+          <% end %>
         </div>
       </div>
       <div class="button_search">

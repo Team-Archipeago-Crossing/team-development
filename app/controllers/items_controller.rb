@@ -4,9 +4,9 @@ class ItemsController < ApplicationController
 		@items = Item.all
 	end
 	
-	 def show
+	def show
     @item = Item.find(params[:id])
     @cart_items = [] #item.cart_items.new
-  end
+	end
   
 end
