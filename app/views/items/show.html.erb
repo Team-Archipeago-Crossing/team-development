@@ -10,8 +10,9 @@
 			<span class="h4"><%= @item.price_taxin %></span>
 			<span>（税込）</span>
 		</p>
-		<%= form_with class: "add_to_cart mt-5 d-flex" do |f| %>
+		<%= form_with model: @cart_item, url: cart_items_path, class: "add_to_cart mt-5 d-flex" do |f| %>
 			<%= f.select :amount, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], {}, class: "form-select w-50 me-3" %>
+			<%= f.hidden_field :item_id, value: @item.id %>
 			<%= f.submit "カートに入れる", class: "btn btn-success" %>
 		<% end %>
 	</div>

@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
 	
 	def show
     @item = Item.find(params[:id])
-    @cart_items = [] #item.cart_items.new
+    @cart_item = CartItem.new
 	end
-  
+
 end
