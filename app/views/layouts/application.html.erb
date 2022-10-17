@@ -7,11 +7,12 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%#= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body class="container">
-    <header class="d-flex justify-content-between bg-header border-bottom">
+    <header class="d-flex justify-content-between bg-light border-bottom">
       <div class="logo_area">
         <div class="logo px-5 py-3 m-2 h3 border border-success">
           <%= link_to root_path do %>
@@ -35,9 +36,14 @@
         </div>
         <div class="search_area m-2">
           <%# ↓の代わりににsearch_boxが入る予定 %>
-          <div class="search_box border border-dark bg-light w-50 ms-auto">
-            SEARCH
-          </div>
+          <%= form_with class: "input-group w-50 ms-auto" do |f| %>
+            <%= f.text_field :search, class: "form-control rounded-start", placeholder: "検索" %>
+            <div class="input-group-append">
+              <%= f.button :type => "submit", class: " btn btn-outline-secondary rounded-0 rounded-end " do %>
+                <i class="fa-solid fa-magnifying-glass"></i>
+              <% end %>
+            </div>
+          <% end %>
         </div>
       </div>
     </header>

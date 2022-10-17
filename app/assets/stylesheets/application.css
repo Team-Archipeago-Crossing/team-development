@@ -23,10 +23,6 @@
    margin-bottom: 0 !important;
  }
 
-.bg-header{
-  background-color: lightyellow;
-}
-
 .sidebar table th, .sidebar table td{
   padding: 5px 20px;
 }
@@ -54,9 +50,6 @@
   height: 250px;
   width: 220px;
   text-align: center;
-  border: 1px solid black;
-  border-radius: 5px;
-  text-decoration: none;
   margin: 10px 5px 0;
   transition: 0.4s;
 }
@@ -65,12 +58,6 @@
   height: 0;
   width: 220px;
   margin: 0 5px;
-
-}
-
-.item_box img{
-  max-height: 190px;
-  max-width: 210px;
 }
 
 .item_box_text{
