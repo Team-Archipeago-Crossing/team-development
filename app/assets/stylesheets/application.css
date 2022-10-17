@@ -65,7 +65,7 @@
   height: 0;
   width: 220px;
   margin: 0 5px;
-  
+
 }
 
 .item_box img{
@@ -88,5 +88,52 @@
 }
 
 .add_to_cart{
-  
+
 }
+
+.pagination{
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.page.current, .pagination a{
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 3px;
+  margin: 0 5px;
+  padding: 3px 8px;
+  text-decoration: none;
+  color: white;
+  background-color: whitesmoke;
+}
+
+.pagination a:hover{
+  color: white;
+  text-decoration: underline 1px;
+}
+
+.page.current{
+  font-weight: bold;
+  color: black;
+}
+
+.page>a{
+  background-color: gray;
+}
+
+.next>a{
+  background-color: dodgerblue;
+}
+
+.last>a{
+  background-color: darkblue;
+}
+
+.prev>a{
+  background-color: limegreen;
+}
+
+.first>a{
+  background-color: seagreen;
+}
+
