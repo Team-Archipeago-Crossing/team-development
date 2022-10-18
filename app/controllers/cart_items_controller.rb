@@ -1,10 +1,10 @@
 class CartItemsController < ApplicationController
 	
-	def create
-		cart_item = CartItem.new(cart_item_params)
-		cart_item.customer_id = 0
-		cart_item.save
-	end
+  def create
+  	cart_item = CartItem.new(cart_item_params)
+  	cart_item.customer_id = 0 #要変更
+  	cart_item.save
+  end
 	
   private
 

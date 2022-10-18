@@ -23,23 +23,31 @@
       </div>
       <div class="button_search">
         <div class="button_area m-2">
-          <%= link_to "About", about_path, class: "btn btn-outline-dark" %>
-          <%= link_to "商品一覧", items_path, class: "btn btn-outline-dark" %>
-          <%# if ログイン時のみ %>
+          <%# if 管理者でログインしていない時のみ %>
+            <%# elsif 顧客ログイン時のみ %>
+              <%= link_to "マイページ", "#", class: "btn btn-outline-dark" %>
+            <%# elsif 非ログイン時のみ %>
+              <%= link_to "About", about_path, class: "btn btn-outline-dark" %>
+            <%# end %>
+            <%= link_to "商品一覧", items_path, class: "btn btn-outline-dark" %><%# 顧客用 %>
+          <%# end %>
+          <%# if 管理者ログイン時のみ %>
+            <%= link_to "商品一覧", "#", class: "btn btn-outline-dark" %><%# 管理者用 %>
+            <%= link_to "会員一覧", "#", class: "btn btn-outline-dark" %>
             <%= link_to "ジャンル一覧", "#", class: "btn btn-outline-dark" %>
             <%= link_to "注文履歴一覧", "#", class: "btn btn-outline-dark" %>
-            <%= link_to "ログアウト", "#", class: "btn btn-outline-dark" %>
+          <%# elsif 顧客ログイン時のみ %>
+            <%= link_to "カート", "#", class: "btn btn-outline-dark" %>
           <%# else %>
             <%= link_to "新規登録", "#", class: "btn btn-outline-dark" %>
             <%= link_to "ログイン", "#", class: "btn btn-outline-dark" %>
           <%# end %>
         </div>
         <div class="search_area m-2">
-          <%# ↓の代わりににsearch_boxが入る予定 %>
-          <%= form_with class: "input-group w-50 ms-auto" do |f| %>
+          <%= form_with class: "input-group w-50 ms-auto", method: :get do |f| %>
             <%= f.text_field :search, class: "form-control rounded-start", placeholder: "検索" %>
             <div class="input-group-append">
-              <%= f.button :type => "submit", class: " btn btn-outline-secondary rounded-0 rounded-end " do %>
+              <%= f.button :type => "submit", name: nil, class: " btn btn-outline-secondary rounded-0 rounded-end " do %>
                 <i class="fa-solid fa-magnifying-glass"></i>
               <% end %>
             </div>
