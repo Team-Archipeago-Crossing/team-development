@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   root to: 'homes#top'
-  devise_for :users
   
    # 顧客用
   # URL /customers/sign_in ...  
