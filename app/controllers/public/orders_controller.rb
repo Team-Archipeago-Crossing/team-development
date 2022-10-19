@@ -1,4 +1,4 @@
-class OrdersController < ApplicationController
+class Public::OrdersController < ApplicationController
 
 	def new
 		@customer = current_customer
