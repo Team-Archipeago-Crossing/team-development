@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
 
 	def new
-		#customer = current_user
-		return redirect_to items_url if CartItem.count == 0 #customer.cart_items.count == 0
+		@customer = current_customer
+		return redirect_to items_url if @customer.cart_items.count == 0
 		@method_name = Order.payment_methods_i18n
 		@addresses_list = addresses_pulldown
 		@address = Address.new #customer.addresses.new
@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
 
 	def confirm
 		return redirect_to new_order_url if request.get?
-		#customer = current_user
+		@customer = current_user
 		@method_name = Order.payment_methods_i18n
 		@addresses_list = addresses_pulldown
 		@address = Address.new #customer.addresses.new
