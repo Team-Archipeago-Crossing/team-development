@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
-  get "about" => "homes#about", as: "about"
+  get "about" => "public/homes#about", as: "about"
   scope module: :public do
     resources :items, only: [:index, :show]
     resources :cart_items, only: [:create]
