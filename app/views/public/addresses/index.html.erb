@@ -25,7 +25,7 @@
     </div>
   </div>
   <div class='row'>
-    
+
     <table class="table table-bordered table-condensed">
       <tr>
         <th>郵便番号</th>
@@ -33,13 +33,16 @@
         <th>宛名</th>
         <th></th>
       </tr>
+      <% @addresses.each do |address| %>
       <tr>
-        <%# @addresses.each do |address| %>
-        <td><%#= address.postal_code %></td>
-        <td><%#= address.address %></td>
-        <td><%#= address.name %></td>
-        <%# end %>
+        <td><%= address.postal_code %></td>
+        <td><%= address.address %></td>
+        <td><%= address.name %></td>
+        <td><%= link_to '編集する', edit_address_path(address.id),class: 'btn btn-success' %>
+            <%= link_to '削除する', address_path(address.id),class: "btn btn-danger", method: :delete %>
+        </td>
       </tr>
+    <% end %>
     </table>
-    
+
   </div>
