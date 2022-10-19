@@ -14,13 +14,13 @@
                 <%= f.label :last_name, "(姓)" %>
               </th>
               <td>
-                <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", class: 'form-control' %>
+                <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", placeholder: "令和", class: 'form-control' %>
               </td>
               <th>
                 <%= f.label :first_name, "(名)" %>
               </th>
               <td>
-                <%= f.text_field :first_name, autocomplete: "first_name", class: 'form-control' %>
+                <%= f.text_field :first_name, autocomplete: "first_name", placeholder: "道子", class: 'form-control' %>
               </td>
             </tr>
             <tr class="field">
@@ -29,34 +29,34 @@
                 <%= f.label :last_name_kana, "(セイ)" %>
               </th>
               <td>
-                <%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana", class: 'form-control' %>
+                <%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana", placeholder: "レイワ", class: 'form-control' %>
               </td>
               <th>
                 <%= f.label :first_name_kana, "(メイ)" %>
               </th>
               <td>
-                <%= f.text_field :first_name_kana, autocomplete: "last_name_kana", class: 'form-control' %>
+                <%= f.text_field :first_name_kana, autocomplete: "last_name_kana", placeholder: "ミチコ", class: 'form-control' %>
               </td>
             </tr>
             <tr class="field">
               <th><%= f.label :email, "メールアドレス" %></th>
               <th></th>
-              <td><%= f.email_field :email, autocomplete: "email", class: 'form-control' %></td>
+              <td><%= f.email_field :email, autocomplete: "email", placeholder: "sample@example.com", class: 'form-control' %></td>
             </tr>
             <tr class="field">
               <th><%= f.label :postal_code, "郵便番号(ハイフンなし)" %></th>
               <th></th>
-              <td><%= f.text_field :postal_code, autocomplete: "postal_code", class: 'form-control' %></td>
+              <td><%= f.text_field :postal_code, autocomplete: "postal_code", placeholder: "0000000", class: 'form-control' %></td>
             </tr>
             <tr class="field">
               <th><%= f.label :address, "住所" %></th>
               <th></th>
-              <td colspan="3"><%= f.text_field :address, autocomplete: "address", class: 'form-control' %></td>
+              <td colspan="3"><%= f.text_field :address, autocomplete: "address", placeholder: "東京都渋谷区代々木神園町0-0", class: 'form-control' %></td>
             </tr>
             <tr class="field">
               <th><%= f.label :telephone_number, "電話番号(ハイフンなし)" %></th>
               <th></th>
-              <td><%= f.text_field :telephone_number, autocomplete: "telephone_number", class: 'form-control' %></td>
+              <td><%= f.text_field :telephone_number, autocomplete: "telephone_number", placeholder: "0000000000", class: 'form-control' %></td>
             </tr>
             <tr class="field">
               <th>

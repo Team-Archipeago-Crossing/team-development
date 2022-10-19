@@ -1,1 +1,29 @@
-Admin#top
+<div class="container">
+  <div class="row">
+    <div class="mx-auto col-11 col-sm-10">
+      <div class="my-4">
+        <h4 class="col-3 bg-light text-center">注文履歴一覧</h4>
+      </div>
+      <table class="col-12">
+        <thead>
+          <tr class="bg-light">
+            <th class="col-3">購入日時</th>
+            <th class="col-3">購入者</th>
+            <th class="col-3">注文個数</th>
+            <th class="col-3">注文ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td><%= order.created_at %></td>
+              <td><%= order.customer.name %></td>
+              <td><%= order.order_details.sum(:amount) %></td>
+              <td><%= order.status %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
