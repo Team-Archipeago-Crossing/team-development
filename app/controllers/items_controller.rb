@@ -1,12 +1,12 @@
 class ItemsController < ApplicationController
-	
+
 	def index
-		@items = Item.all
+		@items = Item.page(params[:page])
 	end
-	
-	 def show
+
+	def show
     @item = Item.find(params[:id])
-    @cart_items = [] #item.cart_items.new
-  end
-  
+    @cart_item = CartItem.new
+	end
+
 end
