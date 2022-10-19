@@ -1,8 +1,9 @@
-class OrdersController < ApplicationController
+class Public::OrdersController < ApplicationController
 
 	def new
+		return redirect_to root_path unless customer_signed_in?
 		@customer = current_customer
-		return redirect_to items_url if @customer.cart_items.count == 0
+		return redirect_to orders_path if @customer.cart_items.count == 0
 		@method_name = Order.payment_methods_i18n
 		@addresses_list = addresses_pulldown
 		@address = Address.new #customer.addresses.new
@@ -10,16 +11,16 @@ class OrdersController < ApplicationController
 	end
 
 	def confirm
-		return redirect_to new_order_url if request.get?
-		@customer = current_user
+		return redirect_to root_path unless customer_signed_in?
+		return if @http_get = request.get?
+		@customer = current_customer
 		@method_name = Order.payment_methods_i18n
 		@addresses_list = addresses_pulldown
 		@address = Address.new #customer.addresses.new
-
 		@method = Order.payment_methods
 		@method_name = Order.payment_methods_i18n
 		@addresses_list = addresses_pulldown
-
+	
 		if @vaildate = order_info_incomplete
 			@select_address_value = params[:address][:select_address]
 			@payment_method_value = params[:address][:payment_method]
@@ -32,25 +33,33 @@ class OrdersController < ApplicationController
 	end
 
 	def create
-		#customer = current_user
-		order = Order.create(\
-			customer_id: 0,\
-			payment_method: $payment_method,\
-			name: $address.name,\
-			postal_code: $address.postal_code,\
-			address: $address.address,\
-			shipping_cost: $shipping_cost,\
-			total_payment: $total_payment\
-		)#current_user.orders.crate(...)
-		cart_items = CartItem.all #@customer.cart_items
+		customer = current_customer
+		$order.save
+		
+		cart_items = customer.cart_items
 		cart_items.each do |item|
-			order.order_details.create(item_id: item.item_id, amount: item.amount, price: item.item.price)
+			$order.order_details.create(item_id: item.item_id, amount: item.amount, price: item.item.price)
 		end
-		CartItem.destroy_all #@customer.cart_items.destrroy_all
+		
+		cart_items.destroy_all
 		reset_temporary_data
 		redirect_to complete_orders_url
 	end
-
+	
+	def index
+		return redirect_to root_path unless customer_signed_in?
+		customer = current_customer
+		@orders = customer.orders.reverse
+	end
+	
+	def show
+		return redirect_to root_path unless customer_signed_in?
+		@order = Order.find(params[:id])
+		@subtotal = 0
+		@order.order_details.each do |item|
+			@subtotal += (item.item.price * $tax_rate).floor * item.amount
+		end
+	end
 
 
 
@@ -74,33 +83,34 @@ class OrdersController < ApplicationController
 	end
 
 	def save_temporary_data
-		#customer = current_user
+		$order = current_customer.orders.new
+		
 		selected_address = Address.find_by(id: params[:address][:addresses_list].to_i)
 		if params[:address][:select_address].to_i == 0
-			@address = Address.find(0) #Address.new(address: customer.address, name: customer.name, postal_code: customer.postal_code)
+			using_address = Address.find(0) #Address.new(address: customer.address, name: customer.name, postal_code: customer.postal_code)
 		elsif params[:address][:select_address].to_i == 1 #&& selected_address.customer == current_user
-			@address = selected_address
+			using_address = selected_address
 		elsif params[:address][:select_address].to_i == 2
-			@address = Address.new(address_params)
-			#@address = @user.addresses.new
+			using_address = Address.new(address_params)	#current_customer.addresses.new
 		end
-		@payment_method = params[:address][:payment_method]
+		
+		$order.name = using_address.name
+		$order.postal_code = using_address.postal_code
+		$order.address = using_address.address
+		$order.payment_method = params[:address][:payment_method]
+		
 		@items = CartItem.all #@customer.cart_items
 		@subtotal = 0
 		@items.each do |item|
 			@subtotal += (item.item.price * $tax_rate).floor * item.amount
 		end
-		@shipping_cost = 800
-		@total_payment = @subtotal + @shipping_cost
-
-		$address = @address
-		$payment_method = @payment_method
-		$total_payment = @total_payment
-		$shipping_cost = @shipping_cost
+		$order.shipping_cost = 800
+		$order.total_payment = @subtotal + $order.shipping_cost
+		@order = $order
 	end
 
 	def reset_temporary_data
-		$address, $payment_method, $total_payment, $shipping_cost = nil
+		$order = nil
 	end
 
 	def order_info_incomplete
