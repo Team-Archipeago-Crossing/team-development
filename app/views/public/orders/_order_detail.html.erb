@@ -1,0 +1,21 @@
+	<table class="table table-bordered caption-top">
+		<caption>注文内容</caption>
+		<thead>
+			<tr>
+				<th class="text-center bg-light">商品名</th>
+				<th class="text-center bg-light">単価 (税込)</th>
+				<th class="text-center bg-light">数量</th>
+				<th class="text-center bg-light">小計</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% items.each do |item| %>
+				<tr>
+					<td class="text-center"><%= item.item.name %></td>
+					<td class="text-end"><%= price_taxin(item.item.price) %></td>
+					<td class="text-center"><%= item.amount %></td>
+					<td class="text-end"><%= price((item.item.price * $tax_rate).floor * item.amount) %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>

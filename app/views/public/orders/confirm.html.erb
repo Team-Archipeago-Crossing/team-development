@@ -1,0 +1,39 @@
+<% if @http_get %>
+	<div>
+		<h3>アクセスが不正です。</h3>
+	</div>
+<% else %>
+	<% content_for :title, "注文情報確認" %>
+	<div class="mx-auto p-3 w-75">
+			<h3 class="bg-light border px-3 d-inline-block">注文情報確認</h3>
+			<div class="d-flex">
+				<div class="col-9 pe-5">
+					<%= render "order_detail", items: @items %>
+				</div>
+				<div class="col-3">
+					<%= render "total_payment" %>
+				</div>
+			</div>
+			<table>
+				<tbody>
+					<tr>
+						<th class="px-5 pb-3">支払方法</th>
+						<td class="px-5 pb-3"><%= @method_name[$order.payment_method] %></td>
+					</tr>
+					<tr>
+						<th class="px-5">お届け先</th>
+						<td class="px-5">
+							<%= "〒#{$order.postal_code}　#{$order.address}" %>
+							<br>
+							<%= $order.name %>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		<div class="d-flex">
+			<%= form_with url: orders_url, class: "mx-auto" do |f| %>
+				<%= f.submit "注文を確定する", class: "btn btn-success" %>
+			<% end %>
+		</div>
+	</div>
+<% end %>

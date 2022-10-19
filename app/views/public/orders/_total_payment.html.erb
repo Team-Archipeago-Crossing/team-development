@@ -1,0 +1,17 @@
+<table class="table table-bordered caption-top">
+	<caption>請求情報</caption>
+	<tbody>
+		<tr>
+			<th class="text-center bg-light text-nowrap">送料</th>
+			<td class="text-end text-nowrap"><%= price(@order.shipping_cost) %></td>
+		</tr>
+		<tr>
+			<th class="text-center bg-light text-nowrap">商品合計</th>
+			<td class="text-end text-nowrap"><%= price(@subtotal) %></td>
+		</tr>
+		<tr>
+			<th class="text-center bg-light text-nowrap">請求金額</th>
+			<td class="text-end text-nowrap"><%= price(@order.total_payment) %></td>
+		</tr>
+	</tbody>
+</table>
