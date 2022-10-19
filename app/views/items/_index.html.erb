@@ -1,38 +1,20 @@
-<div class="item_list d-flex mx-auto">
+<div class="item_list d-flex mx-auto justify-content-center">
   <% items.each do |item| %>
-    <div class="item_box">
+    <div>
       <%= link_to item_path(item.id), class: "text-decoration-none text-dark" do %>
-        <div class="m-1">
+        <div class="card item_box">
           <%#= image_tag item.get_item_image(100,100), size: "100x100" %>
           <%= image_tag asset_path("cake_sample.jpg") %>
-          <div class="item_box_text">
-            <p><%= item.name %></p>
-            <p><%= item.price_taxin %></p>
+          <div class="card-body">
+            <p class="card-title font-weight-bold"><%= item.name %></p>
+            <p class="card-text"><%= price_taxin(item.price) %></p>
           </div>
         </div>
       <% end %>
     </div>
 
   <% end %>
-  <%# ダミー商品 ここから %>
-    <div class="item_box">
-      <%= link_to "#" do %>
-        <%= image_tag asset_path("cake_sample.jpg") %>
-        <p class="m-0">商品名</p>
-      <% end %>
-    </div>
-    <div class="item_box">
-      <%= link_to "#" do %>
-        <%= image_tag asset_path("cake_sample.jpg") %>
-        <p class="m-0">商品名</p>
-      <% end %>
-    </div>
-    <div class="item_box">
-      <%= link_to "#" do %>
-        <%= image_tag asset_path("cake_sample.jpg") %>
-        <p class="m-0">商品名</p>
-      <% end %>
-    </div>
-
-    <%# ダミー商品 ここまで %>
+    <div class="item_box_space"></div>
+    <div class="item_box_space"></div>
+    <div class="item_box_space"></div>
 </div>
