@@ -1,3 +1,4 @@
+<% content_for :title, "TOP" %>
 <%# サイドバー %>
 <%= render "sidebar" %>
 <div class="col-9">
@@ -18,7 +19,7 @@
   <div id="new_items" class="p-3">
     <h2>新着商品</h2>
     <%= render "items/index", items: @items %>
-    <p class="text-end">
+    <p class="text-end mt-3">
       <%= link_to "すべての商品を見る", items_path %>
     </p>
   </div>

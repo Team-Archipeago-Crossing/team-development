@@ -1,0 +1,78 @@
+<% content_for :title, "注文情報入力" %>
+
+<div class="mx-auto p-3 w-75">
+	<div class="align-items-center d-flex mb-3">
+		<h3 class="bg-light border px-3 m-0 d-inline-block">
+			注文情報入力</h3>
+		<% if @vaildate %>
+			<h5 class="mx-2 my-0 p-1 d-inline-block text-danger">入力に誤りがあります</h5>
+		<% end %>
+	</div>
+	<%= form_with model: @address, url: confirm_orders_url, class: "ms-3" do |f| %>
+	<div class="select_payment_method ms-3 p-2 d-inline-block <%= "border border-danger border-3" if @payment_method_unchecked %>">
+		<h5>支払方法</h5>
+		<div>
+			<%= f.radio_button :payment_method, :credit, checked: (true if @payment_method_value == "credit") %>
+			<%# p params[:address][:payment_method] %>
+			<%= f.label :payment_method, @method_name[:credit], value: :credit %>
+		</div>
+		<div>
+			<%= f.radio_button :payment_method, :transfer, checked: (true if @payment_method_value == "transfer") %>
+			<%= f.label :payment_method, @method_name[:transfer], value: :transfer %>
+		</div>
+	</div>
+	<div class="select_address m-3 p-2 <%= "border border-danger border-3" if @select_address_unchecked %>">
+		<h5>お届け先</h5>
+		<div class="mb-2">
+			<%= f.radio_button :select_address, 0, checked: (true if @select_address_value == "0") %>
+			<%= f.label :select_address, "ご自身の住所", value: 0 %>
+			<div class="ps-4">
+				<%= f.label :select_address, "〒#{@customer.postal_code}　#{@customer.address}　#{@customer.last_name} #{@customer.first_name}", value: 0 %>
+			</div>
+		</div>
+		<div class="mb-2">
+			<%= f.radio_button :select_address, 1, checked: (true if @select_address_value == "1") %>
+			<%= f.label :select_address, "登録済み住所から選択", value: 1 %>
+			<div class="ps-4">
+				<%= f.select :addresses_list, @addresses_list, {selected: @addresses_list_value}, class: "form-select me-3 #{"border border-danger border-3" if @addresses_list_incorrect}" %>
+			</div>
+		</div>
+		<div class="mb-2">
+			<%= f.radio_button :select_address, 2, checked: (true if @select_address_value == "2") %>
+			<%= f.label :select_address, "新しいお届け先", value: 2 %>
+			<table class="ms-4">
+				<tbody>
+					<tr>
+						<td>
+							<%= f.label :postal_code, "郵便番号 (ハイフン無し)" %>
+						</td>
+						<td>
+							<%= f.text_field :postal_code, placeholder: "1600022", value: @address_params[:postal_code], class: "form-control w-25 #{"border border-danger border-3" if @postal_code_incorrect}" %>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<%= f.label :address, "住所" %>
+						</td>
+						<td>
+							<%= f.text_field :address, placeholder: "東京都新宿区新宿2丁目5-10 パークウェースクエア24階", value: @address_params[:address], class: "form-control #{"border border-danger border-3" if @address_blank}" %>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<%= f.label :name, "宛名" %>
+						</td>
+						<td>
+							<%= f.text_field :name, placeholder: "鈴木太郎", value: @address_params[:name], class: "form-control #{"border border-danger border-3" if @name_blank}" %>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="d-flex">
+		<%= f.submit "確認画面に進む", class: "btn btn-primary mx-auto" %>
+	</div>
+
+	<% end %>
+</div>
