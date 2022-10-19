@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'homes#top'
+  root to: 'public/homes#top'
 
    # 顧客用
   # URL /customers/sign_in ...
@@ -13,18 +13,19 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
-  
+
   get "about" => "homes#about", as: "about"
-  resources :items, only: [:index, :show]
-  resources :cart_items, only: [:create]
-  resources :orders, only: [:new, :create] do
-    collection do
-      post "confirm"
-      get "confirm"
-      get "complete"
+  scope module: :public do
+    resources :items, only: [:index, :show]
+    resources :cart_items, only: [:create]
+    resources :orders, only: [:new, :create, :index, :show] do
+      collection do
+        post "confirm"
+        get "confirm"
+        get "complete"
+      end
     end
   end
-  
 
   scope module: :public do
   get 'customers'=>'customers#show'
