@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get "about" => "homes#about", as: "about"
   resources :items, only: [:index, :show]
   resources :cart_items, only: [:create]
-  resources :orders, only: [:new, :create] do
+  resources :orders, only: [:new, :create, :index, :show] do
     collection do
       post "confirm"
       get "confirm"

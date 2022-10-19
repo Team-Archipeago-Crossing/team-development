@@ -1,0 +1,47 @@
+<header class="d-flex justify-content-between bg-light border-bottom">
+  <div class="logo_area">
+    <div class="logo px-5 py-3 m-2 h3 border border-success">
+      <%= link_to root_path do %>
+        <%# ↓の代わりににlogoが入る予定 %>
+        <div>ＬＯＧＯ</div>
+      <% end %>
+    </div>
+  </div>
+  <div class="button_search">
+    <div class="button_area m-2">
+      <% if !admin_signed_in? %>
+        <% if customer_signed_in? %>
+          <%= link_to "マイページ", "#", class: "btn btn-outline-dark" %>
+        <% elsif !admin_signed_in? && !customer_signed_in? %>
+          <%= link_to "About", about_path, class: "btn btn-outline-dark" %>
+        <% end %>
+        <%= link_to "商品一覧", items_path, class: "btn btn-outline-dark" %><%# 顧客用 %>
+      <% end %>
+      <% if admin_signed_in? %>
+        <%= link_to "商品一覧", "#", class: "btn btn-outline-dark" %><%# 管理者用 %>
+        <%= link_to "会員一覧", "#", class: "btn btn-outline-dark" %>
+        <%= link_to "ジャンル一覧", "#", class: "btn btn-outline-dark" %>
+        <%= link_to "注文履歴一覧", "#", class: "btn btn-outline-dark" %>
+        <!-- 以下３つ、とりあえずcustomer側のパスを指定しています by taka-->
+      <% elsif customer_signed_in? %>
+        <%= link_to "カート", "#", class: "btn btn-outline-dark" %>
+      <% else %>
+        <%= link_to "新規登録", new_customer_registration_path, class: "btn btn-outline-dark" %>
+        <%= link_to "ログイン", new_customer_session_path, class: "btn btn-outline-dark" %>
+      <% end %>
+      <% if admin_signed_in? || customer_signed_in? %>
+        <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-outline-dark" %>
+      <% end %>
+    </div>
+    <div class="search_area m-2">
+      <%= form_with class: "input-group w-50 ms-auto", method: :get do |f| %>
+        <%= f.text_field :search, class: "form-control rounded-start", placeholder: "検索" %>
+        <div class="input-group-append">
+          <%= f.button :type => "submit", name: nil, class: " btn btn-outline-secondary rounded-0 rounded-end " do %>
+            <i class="fa-solid fa-magnifying-glass"></i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</header>
