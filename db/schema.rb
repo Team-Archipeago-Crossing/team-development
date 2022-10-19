@@ -10,7 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_18_101302) do
+ActiveRecord::Schema.define(version: 2022_10_17_055619) do
+
+  create_table "admins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "last_name", null: false
+    t.string "first_name", null: false
+    t.string "last_name_kana", null: false
+    t.string "first_name_kana", null: false
+    t.string "postal_code", null: false
+    t.string "address", null: false
+    t.string "telephone_number", null: false
+    t.boolean "is_deleted", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+
 
   create_table "addresses", force: :cascade do |t|
     t.string "name", null: false
@@ -21,36 +51,7 @@ ActiveRecord::Schema.define(version: 2022_10_18_101302) do
     t.integer "custmer_id", null: false
   end
 
-  create_table "custmers", force: :cascade do |t|
-    t.string "last_name", null: false
-    t.string "first_name", null: false
-    t.string "last_name_kana", null: false
-    t.string "first_name_kana", null: false
-    t.string "email", null: false
-    t.string "postal_code", null: false
-    t.string "address", null: false
-    t.string "telephone_number", null: false
-    t.string "encrypted_password", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.boolean "is_deleted", default: false, null: false
-  end
-
-  create_table "customers", force: :cascade do |t|
-    t.string "last_name", null: false
-    t.string "first_name", null: false
-    t.string "last_name_kana", null: false
-    t.string "first_name_kana", null: false
-    t.string "email", null: false
-    t.string "postal_code", null: false
-    t.string "address", null: false
-    t.string "telephone_number", null: false
-    t.string "encrypted_password", null: false
-    t.boolean "is_deleted", default: false, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
+   
   create_table "items", force: :cascade do |t|
     t.integer "genre_id", null: false
     t.string "name", null: false
