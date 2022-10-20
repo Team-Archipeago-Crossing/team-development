@@ -23,7 +23,7 @@
       <% if admin_signed_in? && !customer_signed_in? %>
         <%= link_to "商品一覧", "#", class: "btn btn-outline-dark ms-1" %><%# 管理者用 %>
         <%= link_to "会員一覧", "#", class: "btn btn-outline-dark ms-1" %>
-        <%= link_to "ジャンル一覧", "#", class: "btn btn-outline-dark ms-1" %>
+        <%= link_to "ジャンル一覧", admin_genres_path, class: "btn btn-outline-dark ms-1" %>
         <%= link_to "注文履歴一覧", "#", class: "btn btn-outline-dark ms-1" %>
         <!-- 以下３つ、とりあえずcustomer側のパスを指定しています by taka-->
         <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-dark ms-1" %><%# 管理者用 %>
