@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+
   root to: 'public/homes#top'
+  get 'admin' => 'admin/homes#top'
 
    # 顧客用
   # URL /customers/sign_in ...
@@ -14,7 +16,7 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
-  get "about" => "homes#about", as: "about"
+  get "about" => "public/homes#about", as: "about"
   scope module: :public do
     resources :items, only: [:index, :show]
     resources :cart_items, only: [:create]
@@ -25,6 +27,10 @@ Rails.application.routes.draw do
         get "complete"
       end
     end
+  end
+  
+  namespace :admin do
+    resources :customers, only: [:index, :edit, :show, :update]
   end
 
   scope module: :public do
@@ -37,6 +43,10 @@ Rails.application.routes.draw do
     resources :genres, only: [:show]
 end
 
+  # 管理者用
+  namespace :admin do
+    resources :items, except: [:destroy]
+  end
 
   namespace :admin do
     resources :genres, only: [:index,:edit,:create,:update]

@@ -1,0 +1,38 @@
+<div class="mx-auto py-3 px-5 w-100">
+	<h3 class="bg-light border px-3 mb-3 d-inline-block">会員一覧</h3>
+	<table class="table table-bordered">
+		<colgroup>
+			
+		</colgroup>
+		<thead>
+			<tr class="text-center bg-light">
+				<th>会員ID</th>
+				<th>氏名</th>
+				<th>メールアドレス</th>
+				<th>ステータス</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @customers.each do |customer| %>
+				<tr>
+					<td class="text-end">
+						<%= customer.id %>
+					</td>
+					<td class="text-center">
+						<%= link_to "#{customer.last_name} #{customer.first_name}", admin_customer_path(customer.id), class: "text-black" %>
+					</td>
+					<td class="text-center">
+						<%= customer.email %>
+					</td>
+					<td class="text-center">
+						<% if customer.is_deleted %>
+							<span class="text-muted fw-bold">退会</span>
+						<% else %>
+							<span class="text-success fw-bold">有効</span>
+						<% end %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
