@@ -28,20 +28,28 @@ Rails.application.routes.draw do
       end
     end
   end
+  
+  namespace :admin do
+    resources :customers, only: [:index, :edit, :show, :update]
+  end
 
   scope module: :public do
-  get 'customers'=>'customers#show'
-  get 'customers/informetion/edit'=>'customers#edit'
-  patch 'customers/informetion'=>'customers#update'
-  get 'customers/disable_confirm'=>'customers#disable_confirm'
-  patch 'customers/disable'
-  resources :addresses, only: [:index,:edit,:create,:update,:destroy]
+    get 'customers'=>'customers#show'
+    get 'customers/informetion/edit'=>'customers#edit'
+    patch 'customers/informetion'=>'customers#update'
+    get 'customers/disable_confirm'=>'customers#disable_confirm'
+    patch 'customers/disable'
+    resources :addresses, only: [:index,:edit,:create,:update,:destroy]
+    resources :genres, only: [:show]
 end
-  resources :items, only: [:index, :show]
 
   # 管理者用
   namespace :admin do
     resources :items, except: [:destroy]
+  end
+
+  namespace :admin do
+    resources :genres, only: [:index,:edit,:create,:update]
   end
 
 
