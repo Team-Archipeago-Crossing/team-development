@@ -1,0 +1,57 @@
+<div class="mx-auto py-3 px-5 w-100">
+	<h3 class="bg-light border px-3 mb-3 d-inline-block"><%= "#{@customer.last_name} #{@customer.first_name} " %>さんの会員詳細</h3>
+	<table>
+		<tbody>
+			<tr>
+				<td class="p-3">会員ID</td>
+				<td class="p-3"><%= @customer.id %></td>
+			</tr>
+			<tr>
+				<td class="p-3">氏名</td>
+				<td class="p-3"><%= "#{@customer.last_name} #{@customer.first_name}" %></td>
+			</tr>
+			<tr>
+				<td class="p-3">フリガナ</td>
+				<td class="p-3"><%= "#{@customer.last_name_kana} #{@customer.first_name_kana}" %></td>
+			</tr>
+			<tr>
+				<td class="p-3">郵便番号</td>
+				<td class="p-3"><%= @customer.postal_code %></td>
+			</tr>
+			<tr>
+				<td class="p-3">住所</td>
+				<td class="p-3"><%= @customer.address %></td>
+			</tr>
+			<tr>
+				<td class="p-3">電話番号</td>
+				<td class="p-3"><%= @customer.telephone_number %></td>
+			</tr>
+			<tr>
+				<td class="p-3">メールアドレス</td>
+				<td class="p-3"><%= @customer.email %></td>
+			</tr>
+			<tr>
+				<td class="p-3">会員ステータス</td>
+				<td class="p-3">
+					<% if @customer.is_deleted %>
+						<span class="text-muted fw-bold">退会</span>
+					<% else %>
+						<span class="text-success fw-bold">有効</span>
+					<% end %>
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2 class="py-3">
+					<div class="d-flex">
+						<div class="mx-auto">
+							<%= link_to "編集する", edit_admin_customer_path, class: "btn btn-success" %>
+						</div>
+						<div class="mx-auto">
+							<%= link_to "注文履歴一覧を見る", admin_customer_path, class: "btn btn-primary" %><%# admin_homes_path(customer_id: params[:id]) %>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
