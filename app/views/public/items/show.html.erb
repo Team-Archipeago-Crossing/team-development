@@ -1,8 +1,7 @@
 <% content_for :title, @item.name %>
 <%= render "public/homes/sidebar" %>
 <div class="d-flex p-3 col-9">
-	<%#= image_tag asset_path(), class: "show_item_image" %>
-	<div class="show_item_image col-5" style="height:400px;background-color:lightblue;"></div>
+	<%= image_tag @item.get_item_image, class: "show_item_image" %>
 	<div class="show_item_detail offset-1 col-6">
 		<h2><%= @item.name %></h2>
 		<p><%= @item.introduction %></p>
