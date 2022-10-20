@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+
   root to: 'public/homes#top'
+  get 'admin' => 'admin/homes#top'
 
    # 顧客用
   # URL /customers/sign_in ...
@@ -14,7 +16,7 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
-  get "about" => "homes#about", as: "about"
+  get "about" => "public/homes#about", as: "about"
   scope module: :public do
     resources :items, only: [:index, :show]
     resources :cart_items, only: [:create]
@@ -37,6 +39,10 @@ Rails.application.routes.draw do
 end
   resources :items, only: [:index, :show]
 
+  # 管理者用
+  namespace :admin do
+    resources :items, except: [:destroy]
+  end
 
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

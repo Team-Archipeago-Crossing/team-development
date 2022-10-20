@@ -1,0 +1,66 @@
+<p id="notice"></p>
+<div class="container">
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h3>
+        <%= @item.errors.count %> 件のエラーがあります。
+      </h3>
+      <ul>
+        <% @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
+      <div class="my-4">
+        <h4 class="col-3 bg-light text-center">商品新規登録</h4>
+      </div>
+      <div class="mx-5 my-3">
+        <%= form_with model: @item, url: admin_items_path, method: :post do |f| %>
+          <table class="table table-borderless">
+            <tr class="form-group align-middle">
+              <th class="w-25"><%= f.label :item_image, "商品画像" %></th>
+              <td><%= f.file_field :item_image, accept: "image/*", class: "form-control" %></td>
+            </tr>
+            <tr class="form-group align-middle">
+              <th><%= f.label :name, "商品名" %></th>
+              <td><%= f.text_field :name, autocomplete: "name", class: 'form-control', placeholder: "商品名" %></td>
+            </tr>
+            <tr class="form-group">
+              <th class="pt-3"><%= f.label :introduction, "商品説明"%></th>
+              <td><%= f.text_area :introduction, class: 'form-control', placeholder: "ここに説明文を記述します", rows: "5" %></td>
+            </tr>
+            <tr class="form-group align-middle">
+              <th><%= f.label :genre_id, "ジャンル" %></th>
+                                        <!--要編集-->
+              <td><%= f.select :genre_id, [['ケーキ',1],['プリン',2],['焼き菓子',3],['キャンディ',4]], {include_blank: '--選択してください--'}, {class: 'form-select'} %></td>
+            </tr>
+            <tr class="form-group align-middle">
+              <th><%= f.label :price, "税抜価格" %></th>
+              <td><%= f.text_field :price, class: 'form-control', placeholder: "1000" %></td>
+              <td>円</td>
+            </tr>
+            <tr class="form-group align-middle">
+              <th><%= f.label :is_active, "販売ステータス" %></th>
+              <td>
+                <div class="w-25 d-inline-block">
+                <%= f.radio_button :is_active, :true %>
+                <%= f.label :is_active, "販売中" %>
+                </div>
+                <div class="d-inline-block">
+                <%= f.radio_button :is_active, :false %>
+                <%= f.label :is_active, "販売停止中" %>
+                </div>
+              </td>
+            </tr>
+          </table>
+          <div class="actions m-4 text-center">
+            <%= f.submit "新規登録", class: "btn btn-success" %>
+          </div>
+        <% end %>
+      </div>
+     </div>
+  </div>
+</div>

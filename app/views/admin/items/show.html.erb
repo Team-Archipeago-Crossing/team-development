@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="mx-auto col-10">
+      <p id="notice"><%= flash[:notice] %></p>
+      <h4 class="my-4 mx-5 bg-light text-center col-2">商品詳細</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="mx-auto d-flex col-10">
+      <div class="col-4">
+      <%= image_tag @item.get_item_image, size: "300x300" %>
+    </div>
+    <div class=" m-auto mb-4 col-7">
+      <table class="table table-borderless">
+        <tr>
+          <th>商品名</th>
+          <td><%= @item.name %></td>
+        </tr>
+        <tr >
+          <th>商品説明</th>
+          <td><%= @item.introduction %></td>
+        </tr>
+        <tr>
+          <th>ジャンル</th>
+          <td><%= @item.genre_id %></td><%#= @item.genre_id.name %>
+        </tr>
+        <tr class="align-middle">
+          <th>税込価格<br>(税抜価格)</th>
+          <td><%= price_taxin(@item.price) %>（<%= price(@item.price) %>）</td>
+        </tr>
+        <tr>
+          <th>販売ステータス</th>
+          <td class="text-success fs-5"><%= @item.is_active ? '販売中' : '販売停止中' %></td>
+        </tr>
+      </table>
+      <div class="m-4">
+        <%= link_to "編集する", edit_admin_item_path , class: "btn btn-success btn-lg" %>
+      </div>
+    </div>
+    </div>
+    
+  </div>
+</div>
+
+      
