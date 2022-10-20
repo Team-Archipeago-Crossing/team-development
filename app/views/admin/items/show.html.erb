@@ -1,1 +1,17 @@
-items#show
+<div class="col-12">
+  <p id="notice"><%= flash[:notice] %></p>
+  <h4 class="my-4 mx-5 bg-light text-center col-2">商品詳細</h4>
+  
+  <div class="d-flex mx-auto col-10">
+    <div class="col-4">
+      <%= image_tag @item.get_item_image, size: "300x300" %>
+    </div>
+    <div class="col-8">
+          
+    </div>
+    
+  </div>
+  
+</div>
+
+      
