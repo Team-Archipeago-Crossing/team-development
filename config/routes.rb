@@ -28,6 +28,10 @@ Rails.application.routes.draw do
       end
     end
   end
+  
+  namespace :admin do
+    resources :customers, only: [:index, :edit, :show, :update]
+  end
 
   scope module: :public do
   get 'customers'=>'customers#show'
