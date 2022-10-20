@@ -4,6 +4,7 @@ class Item < ApplicationRecord
   #belongs_to :genre
 
   has_one_attached :item_image
+  validates :is_active, inclusion: { in: [true, false] }
 
   def get_item_image
     (item_image.attached?) ? item_image : 'noimage.png'
