@@ -1,11 +1,24 @@
+<p id="notice"></p>
 <div class="container">
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h3>
+        <%= @item.errors.count %> errors prohibited this obj from being saved:
+      </h3>
+      <ul>
+        <% @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="row">
     <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
       <div class="my-4">
         <h4 class="col-3 bg-light text-center">商品新規登録</h4>
       </div>
       <div class="mx-5 my-3">
-        <%= form_with model: @item do |f| %>
+        <%= form_with model: @item, url: admin_items_path, method: :post do |f| %>
           <table class="table table-borderless">
             <tr class="form-group align-middle">
               <th class="w-25"><%= f.label :item_image, "商品画像" %></th>
@@ -20,9 +33,9 @@
               <td><%= f.text_area :introduction, class: 'form-control', placeholder: "ここに説明文を記述します", rows: "5" %></td>
             </tr>
             <tr class="form-group align-middle">
-              <th><%= f.label :genre, "ジャンル" %></th>
+              <th><%= f.label :genre_id, "ジャンル" %></th>
                                         <!--要編集-->
-              <td><%= f.select :genre, [['ケーキ',1],['プリン',2],['焼き菓子',3],['キャンディ',4]], {include_blank: '--選択してください--'}, {class: 'form-select'} %></td>
+              <td><%= f.select :genre_id, [['ケーキ',1],['プリン',2],['焼き菓子',3],['キャンディ',4]], {include_blank: '--選択してください--'}, {class: 'form-select'} %></td>
             </tr>
             <tr class="form-group align-middle">
               <th><%= f.label :price, "税抜価格" %></th>

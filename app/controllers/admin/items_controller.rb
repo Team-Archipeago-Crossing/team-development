@@ -11,7 +11,7 @@ class Admin::ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to admin_item_path(@item)
+      redirect_to admin_item_path(@item), notice: "商品の新規登録に成功しました."
     else
       render 'new'
     end
@@ -32,7 +32,7 @@ class Admin::ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:item_image, :name, :introduction, :genre, :price, :is_active)
+    params.require(:item).permit(:item_image, :name, :introduction, :genre_id, :price, :is_active)
   end
 
 end
