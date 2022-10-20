@@ -28,15 +28,18 @@ Rails.application.routes.draw do
   end
 
   scope module: :public do
-  get 'customers'=>'customers#show'
-  get 'customers/informetion/edit'=>'customers#edit'
-  patch 'customers/informetion'=>'customers#update'
-  get 'customers/disable_confirm'=>'customers#disable_confirm'
-  patch 'customers/disable'
-  resources :addresses, only: [:index,:edit,:create,:update,:destroy]
+    get 'customers'=>'customers#show'
+    get 'customers/informetion/edit'=>'customers#edit'
+    patch 'customers/informetion'=>'customers#update'
+    get 'customers/disable_confirm'=>'customers#disable_confirm'
+    patch 'customers/disable'
+    resources :addresses, only: [:index,:edit,:create,:update,:destroy]
 end
-  resources :items, only: [:index, :show]
 
+
+  namespace :admin do
+    resources :genres, only: [:index,:edit,:create,:update]
+  end
 
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
