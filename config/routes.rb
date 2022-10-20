@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     get 'customers/disable_confirm'=>'customers#disable_confirm'
     patch 'customers/disable'
     resources :addresses, only: [:index,:edit,:create,:update,:destroy]
+    resources :genres, only: [:show]
 end
 
 
