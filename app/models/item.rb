@@ -12,4 +12,8 @@ class Item < ApplicationRecord
     (item_image.attached?) ? item_image : 'noimage.png'
   end
 
+def with_tax_price
+    (price * 1.08).floor
+end
+
 end

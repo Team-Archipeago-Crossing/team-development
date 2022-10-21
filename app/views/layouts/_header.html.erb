@@ -14,7 +14,7 @@
           <div class="d-inline-block my-auto me-2">
             <p class="fw-bold"><%= "#{current_customer.last_name} #{current_customer.first_name} さん" %> こんにちは</p>
           </div>
-          <%= link_to "マイページ", "#", class: "btn btn-outline-dark ms-1" %>
+          <%= link_to "マイページ", customers_path, class: "btn btn-outline-dark ms-1" %>
         <% else %>
           <%= link_to "About", about_path, class: "btn btn-outline-dark ms-1" %>
         <% end %>
@@ -28,7 +28,7 @@
         <!-- 以下３つ、とりあえずcustomer側のパスを指定しています by taka-->
         <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-dark ms-1" %><%# 管理者用 %>
       <% elsif !admin_signed_in? && customer_signed_in? %>
-        <%= link_to "カート", "#", class: "btn btn-outline-dark ms-1" %>
+        <%= link_to "カート", cart_items_path, class: "btn btn-outline-dark ms-1" %>
         <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-outline-dark ms-1" %><%# 顧客用 %>
       <% elsif !admin_signed_in? && !customer_signed_in? %>
         <%= link_to "新規登録", new_customer_registration_path, class: "btn btn-outline-dark ms-1" %>
