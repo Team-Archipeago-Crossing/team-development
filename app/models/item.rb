@@ -11,5 +11,10 @@ class Item < ApplicationRecord
   def get_item_image
     (item_image.attached?) ? item_image : 'noimage.png'
   end
+  
+  
+  def self.looks(search)
+    @item = Item.where("name LIKE?","%#{search}%")
+  end
 
 end
