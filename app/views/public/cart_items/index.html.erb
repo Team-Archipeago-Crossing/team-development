@@ -3,6 +3,7 @@
     <div class='col-10'>
       <h2>ショッピングカート</h2>
     </div>
+    <% if @cart_items.present? %>
     <div class='col-2'>
       <%= link_to 'カートを空にする', destroy_all_cart_items_path, class: "btn btn-danger", method: :delete %>
     </div>
@@ -50,3 +51,12 @@
       <%= link_to '情報入力に進む',new_order_path, class: "btn btn-success btn-lg" %>
     </div>
   </div>
+  <% else %>
+  <div class='container mt-3'>
+    <div class='row'>
+      <div class="col-4 mx-auto pb-3">
+        <h2>カート内に商品がありません。</h2>
+  　　</div>
+  　</div>
+  </div>
+  <% end %>
