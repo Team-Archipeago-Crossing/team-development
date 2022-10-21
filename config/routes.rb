@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   root to: 'public/homes#top'
-  get 'admin' => 'admin/homes#top'
+  #get 'admin' => 'admin/homes#top'
 
    # 顧客用
   # URL /customers/sign_in ...
@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    root to: 'homes#top'
     resources :customers, only: [:index, :edit, :show, :update]
     resources :orders, only: [:edit, :update]
     patch "/order_detail/:id" => "orders#update_detail", as: "order_detail"
