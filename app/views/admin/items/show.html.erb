@@ -30,7 +30,7 @@
         </tr>
         <tr>
           <th>販売ステータス</th>
-          <td class="text-success fs-5"><%= @item.is_active ? '販売中' : '販売停止中' %></td>
+          <td class="fs-5" style="<%= @item.is_active ? "color:green;" : "color:grey;"%>"><%= @item.is_active ? '販売中' : '販売停止中' %></td>
         </tr>
       </table>
       <div class="m-4">
