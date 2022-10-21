@@ -26,6 +26,14 @@ Rails.application.routes.draw do
         get "complete"
       end
     end
+    
+    get 'customers'=>'customers#show'
+    get 'customers/informetion/edit'=>'customers#edit'
+    patch 'customers/informetion'=>'customers#update'
+    get 'customers/disable_confirm'=>'customers#disable_confirm'
+    patch 'customers/disable'
+    resources :addresses, only: [:index,:edit,:create,:update,:destroy]
+    resources :genres, only: [:show]
   end
 
   namespace :admin do
@@ -36,16 +44,6 @@ Rails.application.routes.draw do
     resources :items, except: [:destroy]
     resources :genres, only: [:index,:edit,:create,:update]
   end
-
-  scope module: :public do
-    get 'customers'=>'customers#show'
-    get 'customers/informetion/edit'=>'customers#edit'
-    patch 'customers/informetion'=>'customers#update'
-    get 'customers/disable_confirm'=>'customers#disable_confirm'
-    patch 'customers/disable'
-    resources :addresses, only: [:index,:edit,:create,:update,:destroy]
-    resources :genres, only: [:show]
-end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
