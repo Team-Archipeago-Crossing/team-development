@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
   root to: 'public/homes#top'
-  get 'admin' => 'admin/homes#top'
 
    # 顧客用
   # URL /customers/sign_in ...
@@ -29,7 +28,6 @@ Rails.application.routes.draw do
         post "confirm"
         get "confirm"
         get "complete"
-
       end
     end
   end
@@ -46,17 +44,18 @@ Rails.application.routes.draw do
     patch 'customers/disable'
     resources :addresses, only: [:index,:edit,:create,:update,:destroy]
     resources :genres, only: [:show]
-end
-
-  # 管理者用
-  namespace :admin do
-    resources :items, except: [:destroy]
   end
 
   namespace :admin do
+    root to: 'homes#top'
+    resources :customers, only: [:index, :edit, :show, :update]
+    resources :orders, only: [:edit, :update]
+    patch "/order_detail/:id" => "orders#update_detail", as: "order_detail"
+    resources :items, except: [:destroy]
     resources :genres, only: [:index,:edit,:create,:update]
   end
 
+  get "search" => "searches#search"
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

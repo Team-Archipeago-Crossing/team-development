@@ -11,6 +11,11 @@ class Item < ApplicationRecord
   def get_item_image
     (item_image.attached?) ? item_image : 'noimage.png'
   end
+  
+  
+  def self.looks(search)
+    @item = Item.where("name LIKE?","%#{search}%")
+  end
 
 def with_tax_price
     (price * 1.08).floor
