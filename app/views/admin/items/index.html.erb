@@ -4,7 +4,7 @@
       <div class="my-4">
         <h4 class="col-3 bg-light text-center">商品一覧</h4>
       </div>
-      <table class="col-12">
+      <table class="table col-12">
         <thead>
           <tr class="bg-light">
             <th>商品ID</th>
@@ -20,8 +20,8 @@
               <td><%= item.id %></td>
               <td><%= link_to item.name, admin_item_path(item), class: "link-dark" %></td>
               <td><%= price(item.price) %></td>
-              <td><%= item.genre_id %></td><%#= item.genre_id.name %>
-              <td class="text-success fs-5"><%= item.is_active ? '販売中' : '販売停止中' %></td>
+              <td><%= item.genre.name %></td>
+              <td style="<%= item.is_active ? "color:green;" : "color:grey;"%>"><%= item.is_active ? '販売中' : '販売停止中' %></td>
             </tr>
           <% end %>
           <%= paginate @items %>

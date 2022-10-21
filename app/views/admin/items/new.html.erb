@@ -34,8 +34,7 @@
             </tr>
             <tr class="form-group align-middle">
               <th><%= f.label :genre_id, "ジャンル" %></th>
-                                        <!--要編集-->
-              <td><%= f.select :genre_id, [['ケーキ',1],['プリン',2],['焼き菓子',3],['キャンディ',4]], {include_blank: '--選択してください--'}, {class: 'form-select'} %></td>
+              <td><%= f.select :genre_id, @genres.map{ |genre| [genre.name, genre.id]}, {include_blank: '--選択してください--'}, {class: 'form-select'} %></td>
             </tr>
             <tr class="form-group align-middle">
               <th><%= f.label :price, "税抜価格" %></th>
