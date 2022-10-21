@@ -18,7 +18,11 @@ Rails.application.routes.draw do
   get "about" => "public/homes#about", as: "about"
   scope module: :public do
     resources :items, only: [:index, :show]
-    resources :cart_items, only: [:create]
+    resources :cart_items, only: [:index, :create, :update, :destroy] do
+      collection do
+        delete "destroy_all"
+      end
+    end  
     resources :orders, only: [:new, :create, :index, :show] do
       collection do
         post "confirm"
@@ -26,7 +30,13 @@ Rails.application.routes.draw do
         get "complete"
       end
     end
-    
+  end
+
+  namespace :admin do
+    resources :customers, only: [:index, :edit, :show, :update]
+  end
+
+  scope module: :public do
     get 'customers'=>'customers#show'
     get 'customers/informetion/edit'=>'customers#edit'
     patch 'customers/informetion'=>'customers#update'

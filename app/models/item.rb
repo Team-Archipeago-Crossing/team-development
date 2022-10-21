@@ -17,4 +17,8 @@ class Item < ApplicationRecord
     @item = Item.where("name LIKE?","%#{search}%")
   end
 
+def with_tax_price
+    (price * 1.08).floor
+end
+
 end
