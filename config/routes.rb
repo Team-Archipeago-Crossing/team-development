@@ -28,9 +28,12 @@ Rails.application.routes.draw do
       end
     end
   end
-  
+
   namespace :admin do
     resources :customers, only: [:index, :edit, :show, :update]
+    resources :orders, only: [:edit, :update]
+    patch "/order_detail/:id" => "orders#update_detail", as: "order_detail"
+    resources :items, except: [:destroy]
   end
 
   scope module: :public do
@@ -42,12 +45,6 @@ Rails.application.routes.draw do
   resources :addresses, only: [:index,:edit,:create,:update,:destroy]
 end
   resources :items, only: [:index, :show]
-
-  # 管理者用
-  namespace :admin do
-    resources :items, except: [:destroy]
-  end
-
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
