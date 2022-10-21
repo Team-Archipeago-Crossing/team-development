@@ -34,17 +34,18 @@ Rails.application.routes.draw do
     resources :orders, only: [:edit, :update]
     patch "/order_detail/:id" => "orders#update_detail", as: "order_detail"
     resources :items, except: [:destroy]
+    resources :genres, only: [:index,:edit,:create,:update]
   end
 
   scope module: :public do
-  get 'customers'=>'customers#show'
-  get 'customers/informetion/edit'=>'customers#edit'
-  patch 'customers/informetion'=>'customers#update'
-  get 'customers/disable_confirm'=>'customers#disable_confirm'
-  patch 'customers/disable'
-  resources :addresses, only: [:index,:edit,:create,:update,:destroy]
+    get 'customers'=>'customers#show'
+    get 'customers/informetion/edit'=>'customers#edit'
+    patch 'customers/informetion'=>'customers#update'
+    get 'customers/disable_confirm'=>'customers#disable_confirm'
+    patch 'customers/disable'
+    resources :addresses, only: [:index,:edit,:create,:update,:destroy]
+    resources :genres, only: [:show]
 end
-  resources :items, only: [:index, :show]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

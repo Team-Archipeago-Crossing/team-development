@@ -1,11 +1,12 @@
 class Admin::ItemsController < ApplicationController
   
   def index
-    
+    @items = Item.page(params[:page])
   end
   
   def new
     @item = Item.new
+    @genres = Genre.all
   end
   
   def create
@@ -23,6 +24,7 @@ class Admin::ItemsController < ApplicationController
   
   def edit
     @item = Item.find(params[:id])
+    @genres = Genre.all
   end
   
   def update
