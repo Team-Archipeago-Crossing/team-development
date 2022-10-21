@@ -1,8 +1,14 @@
 <div class="container">
   <div class="row">
-    <div class="mx-auto col-11 col-sm-10">
-      <div class="my-4">
-        <h4 class="col-3 bg-light text-center">商品一覧</h4>
+    <div class="mx-auto mb-4 col-11 col-sm-10">
+      <div class="my-4 d-flex">
+        <h4 class="col-2 bg-light text-center">商品一覧</h4>
+        <div class="col-9"></div>
+        <div class="col-1 text-center pt-1">
+          <%= link_to new_admin_item_path, class: "align-middle link-secondary" do %>
+            <i class="fa-2x fa-solid fa-circle-plus"></i>
+          <% end %>
+        </div>
       </div>
       <table class="table col-12">
         <thead>
