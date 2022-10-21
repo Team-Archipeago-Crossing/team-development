@@ -1,26 +1,34 @@
 class Public::OrdersController < ApplicationController
 
+	def index
+		return redirect_to root_path unless customer_signed_in?
+		customer = current_customer
+		@orders = customer.orders.reverse
+	end
+
+	def show
+		return redirect_to root_path unless customer_signed_in?
+		@order = Order.find(params[:id])
+		@subtotal = 0
+		@order.order_details.each do |item|
+			@subtotal += (item.item.price * $tax_rate).floor * item.amount
+		end
+	end
+
 	def new
 		return redirect_to root_path unless customer_signed_in?
 		@customer = current_customer
 		return redirect_to orders_path if @customer.cart_items.count == 0
 		@method_name = Order.payment_methods_i18n
 		@addresses_list = addresses_pulldown
-		@address = Address.new #customer.addresses.new
+		@address = @customer.addresses.new
 		@address_params = {}
 	end
 
 	def confirm
 		return redirect_to root_path unless customer_signed_in?
 		return if @http_get = request.get?
-		@customer = current_customer
-		@method_name = Order.payment_methods_i18n
-		@addresses_list = addresses_pulldown
-		@address = Address.new #customer.addresses.new
-		@method = Order.payment_methods
-		@method_name = Order.payment_methods_i18n
-		@addresses_list = addresses_pulldown
-	
+		new
 		if @vaildate = order_info_incomplete
 			@select_address_value = params[:address][:select_address]
 			@payment_method_value = params[:address][:payment_method]
@@ -34,32 +42,22 @@ class Public::OrdersController < ApplicationController
 
 	def create
 		customer = current_customer
-		$order.save
-		
 		cart_items = customer.cart_items
+
+		$order.save
 		cart_items.each do |item|
 			$order.order_details.create(item_id: item.item_id, amount: item.amount, price: item.item.price)
 		end
-		
 		cart_items.destroy_all
 		reset_temporary_data
 		redirect_to complete_orders_url
 	end
-	
-	def index
-		return redirect_to root_path unless customer_signed_in?
-		customer = current_customer
-		@orders = customer.orders.reverse
-	end
-	
-	def show
-		return redirect_to root_path unless customer_signed_in?
-		@order = Order.find(params[:id])
-		@subtotal = 0
-		@order.order_details.each do |item|
-			@subtotal += (item.item.price * $tax_rate).floor * item.amount
-		end
-	end
+
+
+
+
+
+
 
 
 
@@ -68,7 +66,7 @@ class Public::OrdersController < ApplicationController
 
 	def addresses_pulldown
 		list = [["選択してください...", false]]
-		Address.all.each do |add| #customer.addresses.each do |add|
+		@customer.addresses.each do |add|
 			postal_code = add.postal_code
 			address = add.address
 			name = add.name
@@ -79,26 +77,26 @@ class Public::OrdersController < ApplicationController
 	end
 
 	def address_params
-	params.require(:address).permit(:name, :address, :postal_code)
+		params.require(:address).permit(:name, :address, :postal_code)
 	end
 
 	def save_temporary_data
-		$order = current_customer.orders.new
-		
+		$order = @customer.orders.new
+
 		selected_address = Address.find_by(id: params[:address][:addresses_list].to_i)
 		if params[:address][:select_address].to_i == 0
-			using_address = Address.find(0) #Address.new(address: customer.address, name: customer.name, postal_code: customer.postal_code)
-		elsif params[:address][:select_address].to_i == 1 #&& selected_address.customer == current_user
+			using_address = Address.new(address: @customer.address, name: "#{@customer.last_name} #{@customer.first_name}", postal_code: @customer.postal_code)
+		elsif params[:address][:select_address].to_i == 1 && selected_address.customer == @customer
 			using_address = selected_address
 		elsif params[:address][:select_address].to_i == 2
-			using_address = Address.new(address_params)	#current_customer.addresses.new
+			using_address = @customer.addresses.new(address_params)
 		end
-		
+
 		$order.name = using_address.name
 		$order.postal_code = using_address.postal_code
 		$order.address = using_address.address
 		$order.payment_method = params[:address][:payment_method]
-		
+
 		@items = CartItem.all #@customer.cart_items
 		@subtotal = 0
 		@items.each do |item|

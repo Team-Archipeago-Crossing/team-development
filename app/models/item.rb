@@ -14,11 +14,11 @@ class Item < ApplicationRecord
   
   
   def self.looks(search)
-    @item = Item.where("name LIKE?","%#{search}%")
+    Item.where("name LIKE?","%#{search}%")
   end
 
-def with_tax_price
-    (price * 1.08).floor
-end
+  def with_tax_price
+    (price * $tax_rate).floor
+  end
 
 end

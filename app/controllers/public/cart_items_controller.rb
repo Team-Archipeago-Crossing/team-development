@@ -3,7 +3,7 @@ class Public::CartItemsController < ApplicationController
   def create
     customer = current_customer
   	cart_item = CartItem.new(cart_item_params)
-  	cart_item.customer_id = customer.id #要変更
+  	cart_item.customer_id = customer.id
   	cart_item.save
   end
 
