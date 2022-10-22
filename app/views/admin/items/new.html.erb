@@ -6,7 +6,6 @@
         <h4 class="col-3 bg-light text-center">商品新規登録</h4>
       </div>
       <div class="mx-5 my-3">
-        <%#= render "form", item: @item, genres: @genres %>
         <%= form_with model: @item, url: admin_items_path do |f| %>
           <table class="table table-borderless">
             <tr class="form-group align-middle">
