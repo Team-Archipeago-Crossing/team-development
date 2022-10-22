@@ -1,26 +1,7 @@
-<%= render "public/homes/sidebar", genres: @genres %>
-  <div class="item-index">
-    <div class="p-3 col-9">
-      <h3>商品一覧</h3>
-      <tr class="item-box">
-        <div class="item_list d-flex mx-auto justify-content-center">
-          <% @genre.items.each do |item| %>
-            <div>
-              <%= link_to item_path(item.id), class: "text-decoration-none text-dark" do %>
-                <div class="card item_box">
-                  <%= image_tag item.get_item_image, height: "200" %>
-                  <div class="card-body">
-                    <p class="card-title font-weight-bold"><%= item.name %></p>
-                    <p class="card-text"><%= price_taxin(item.price) %></p>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          <% end %>
-          <div class="item_box_space"></div>
-          <div class="item_box_space"></div>
-          <div class="item_box_space"></div>
-        </div>
-      </tr>
-    </div>
-  </div>
+<% content_for :title, "ジャンル検索" %>
+<%= render "public/homes/sidebar" %>
+<div class="p-3 col-9">
+  <h3><%= Genre.find(params[:id]).name %>一覧</h3>
+  <%= render "public/items/index", items: @items %>
+  <%= paginate @items %>
+</div>
