@@ -2,9 +2,17 @@ class Public::CartItemsController < ApplicationController
 
   def create
     customer = current_customer
-  	cart_item = CartItem.new(cart_item_params)
-  	cart_item.customer_id = customer.id
-  	cart_item.save
+  	cart_items = customer.cart_items
+    if cart_items.pluck(:item_id).include?(params[:cart_item][:item_id].to_i)
+      item = cart_items.find_by(item_id: params[:cart_item][:item_id].to_i)
+      item.amount += params[:cart_item][:amount].to_i
+      item.save
+    else
+      cart_item = CartItem.new(cart_item_params)
+      cart_item.customer_id = customer.id
+      cart_item.save
+    end
+    redirect_to cart_items_path
   end
 
   def index
