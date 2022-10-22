@@ -30,9 +30,9 @@
               <td style="<%= item.is_active ? "color:green;" : "color:grey;"%>"><%= item.is_active ? '販売中' : '販売停止中' %></td>
             </tr>
           <% end %>
-          <%= paginate @items %>
         </tbody>
       </table>
+      <%= paginate @items %>
     </div>
   </div>
 </div>

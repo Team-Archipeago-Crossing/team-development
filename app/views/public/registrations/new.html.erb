@@ -7,7 +7,7 @@
       <div class="m-5">
         <%= form_with model: @customer, url: customer_registration_path, id: 'new_customer', class: 'new_customer', local: true do |f| %>
           <%= render "public/shared/error_messages", resource: resource %>
-          <table class="table table-borderless">
+          <table class="table table-borderless text-nowrap">
             <tr class="field">
               <th class="w-25"><label>名前</label></th>
               <th>
@@ -51,7 +51,7 @@
             <tr class="field">
               <th><%= f.label :address, "住所" %></th>
               <th></th>
-              <td colspan="3"><%= f.text_field :address, autocomplete: "address", placeholder: "東京都渋谷区代々木神園町0-0", class: 'form-control' %></td>
+              <td colspan="3"><%= f.text_field :address, autocomplete: "address", placeholder: "東京都渋谷区代々木神園町0-0", class: 'form-control w-100' %></td>
             </tr>
             <tr class="field">
               <th><%= f.label :telephone_number, "電話番号(ハイフンなし)" %></th>
