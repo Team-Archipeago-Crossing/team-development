@@ -3,10 +3,13 @@
   <div class='row'>
     <div class='col-md-7'>
       <h2>マイページ</h2>
-      <h3>登録情報</h3>
-      <div class = "col-md-2">
-      <%= link_to '編集', customers_informetion_edit_path, class:"btn btn-success btn-block" %>
-      </div>
+      <div class = "col-md-4">
+        <table class="table table-sm table-borderless">
+          <tr>
+            <td><h3>登録情報</h3></td>
+            <td><%= link_to '編集する', customers_informetion_edit_path, class:"btn btn-success btn-block" %></td>
+          </tr>
+        </table>      </div>
       <table class="table table-bordered table-condensed">
         <tr>
           <th>氏名</th>
@@ -36,9 +39,16 @@
         </tr>
       </table>
       <div class = "col-md-4">
-      配送先<%= link_to '一覧をみる', addresses_path , class:"btn btn-primary btn-block" %><br>
-      注文履歴<%= link_to '一覧をみる', orders_path , class:"btn btn-primary btn-block" %>
-      </div>
+        <table class="table table-sm table-borderless">
+          <tr>
+            <td>配送先</td>
+            <td><%= link_to '一覧をみる', addresses_path , class:"btn btn-primary btn-block" %></td>
+          </tr>
+          <tr>
+            <td> 注文履歴</td>
+            <td><%= link_to '一覧をみる', orders_path , class:"btn btn-primary btn-block" %></td>
+          </tr>
+        </table>      </div>
     </div>
   </div>
 </div>
