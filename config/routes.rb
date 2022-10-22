@@ -32,7 +32,6 @@ Rails.application.routes.draw do
     end
   end
 
-
   scope module: :public do
     get 'customers'=>'customers#show'
     get 'customers/informetion/edit'=>'customers#edit'
