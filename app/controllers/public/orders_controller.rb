@@ -25,12 +25,8 @@ class Public::OrdersController < ApplicationController
 	def confirm
 		return if @http_get = request.get?
 		new
-		if @vaildate = order_info_incomplete
-			@select_address_value = params[:address][:select_address]
-			@payment_method_value = params[:address][:payment_method]
-			@addresses_list_value = params[:address][:addresses_list]
+		if @validate = order_info_incomplete
 			@address_params = address_params
-			render "new"
 		else
 			save_temporary_data
 		end

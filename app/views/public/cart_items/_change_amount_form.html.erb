@@ -1,0 +1,15 @@
+<td style="border-right: none; width: 10%;">
+  <%= image_tag cart_item.item.get_item_image, height: "60" %>
+</td>
+<td class="text-center" style="border-left: none;">
+  <%= cart_item.item.name %>
+</td>
+<td class="text-end"><%= price_taxin(cart_item.item.price) %></td>
+<td class="change_amount text-center">
+  <%= form_with model: cart_item, url: cart_item_path(cart_item.id), method: :patch, local: false, class: "d-flex" do |f| %>
+    <%= f.select :amount, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], {}, class: "form-select mx-auto" %>
+    <%= f.submit "変更",  class: "btn btn-success ms-2 mx-auto" %>
+  <% end %>
+</td>
+<td class="text-end"><%= price(cart_item.subtotal) %></td>
+<td class="text-center"><%= link_to '削除する', cart_item_path(cart_item.id), class: "btn btn-danger", remote: true, method: :delete %></td>

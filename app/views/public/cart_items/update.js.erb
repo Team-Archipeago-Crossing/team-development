@@ -1,0 +1,2 @@
+$(".cart_item_<%= @cart_item.item.id %>").html("<%= j(render "public/cart_items/change_amount_form", cart_item: @cart_item) %>")
+$(".total_payment").html("<%= price(@subtotal) %>")

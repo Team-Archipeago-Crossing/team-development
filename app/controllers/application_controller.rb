@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 	before_action :authenticate_admin!, if: proc{controller_path.start_with?("admin")}
-  before_action :authenticate_customer!, if: proc{["cart_items", "customers", "orders"].include?(controller_name)}
+  before_action :authenticate_customer!, if: proc{controller_path.start_with?("public") && ["cart_items", "customers", "orders"].include?(controller_name)}
 
 	def price_taxin(price)
 		"￥ #{(price * $tax_rate).floor.to_s(:delimited)}"

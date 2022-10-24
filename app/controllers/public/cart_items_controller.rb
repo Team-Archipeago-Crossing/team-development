@@ -16,35 +16,28 @@ class Public::CartItemsController < ApplicationController
   end
 
   def index
-    @customer = current_customer
-    @cart_items = @customer.cart_items.all
-    @total = 0
+    calc_subtotal
   end
 
   def update
     @cart_item = CartItem.find(params[:id])
     @cart_item.update(cart_item_params)
-    @customer = current_customer
-    @cart_items = @customer.cart_items.all
-    redirect_to cart_items_path
+    calc_subtotal
   end
 
   def destroy
     cart_item = CartItem.find(params[:id])
+    @id = cart_item.item.id
     cart_item.destroy
-    @customer = current_customer
-    @cart_items = @customer.cart_items.all
-    redirect_to cart_items_path
+    calc_subtotal
+    @cart_items = @customer.cart_items
+    #if @cart_items.count == 0
   end
 
   def destroy_all
-    if CartItem.destroy_all
-       @customer = current_customer
-       @cart_items = @customer.cart_items.all
-       redirect_to cart_items_path
-    else
-      render :index
-    end
+    @cart_items = current_customer.cart_items
+    @cart_items.destroy_all
+    render "destroy"
   end
 
 
@@ -54,5 +47,15 @@ class Public::CartItemsController < ApplicationController
   def cart_item_params
     params.require(:cart_item).permit(:amount, :item_id)
   end
+
+
+def calc_subtotal
+  @customer = current_customer
+  @cart_items = @customer.cart_items
+  @subtotal = 0
+  @cart_items.each do |item|
+    @subtotal += (item.item.price * $tax_rate).floor * item.amount
+  end
+end
 
 end
