@@ -10,8 +10,10 @@ class Public::CustomersController < ApplicationController
   def update
     customer = current_customer
     if customer.update(customer_params)
+      flash[:notice] = "変更を保存しました。"
       redirect_to customers_path
     else
+      flash[:alret] = "項目を全て記入してください。"
       @customer = current_customer
       render :edit
     end

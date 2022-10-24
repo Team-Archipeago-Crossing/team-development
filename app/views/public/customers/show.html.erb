@@ -1,45 +1,49 @@
 <% content_for :title, "マイページ" %>
 <div class='container mt-3'>
   <div class='row'>
-    <div class='col-md-7'>
-      <h2>マイページ</h2>
-      <div class = "col-md-4">
-        <table class="table table-sm table-borderless">
+    <div class='col-7'>
+      <h2 class="bg-light border px-3 mb-3 d-inline-block">マイページ</h2>
+      <div class="text-success">
+        <%= flash[:notice] %>
+      </div>
+      <div class = "col-4">
+        <table class="table table-borderless text-nowrap">
           <tr>
             <td><h3>登録情報</h3></td>
             <td><%= link_to '編集する', customers_informetion_edit_path, class:"btn btn-success btn-block" %></td>
           </tr>
-        </table>      </div>
-      <table class="table table-bordered table-condensed">
+        </table>
+      </div>
+      <table class="table table-bordered">
         <tr>
-          <th>氏名</th>
-          <th><%= @customer.last_name %>
-          <%= @customer.first_name %></th>
+          <td class="align-middle bg-light">氏名</td>
+          <td><%= @customer.last_name %>
+          <%= @customer.first_name %></td>
         </tr>
         <tr>
-          <td>カナ</td>
+          <td class="align-middle bg-light">カナ</td>
           <td><%= @customer.last_name_kana %>
           <%= @customer.first_name_kana %></td>
         </tr>
         <tr>
-          <td>郵便番号</td>
+          <td class="align-middle bg-light">郵便番号</td>
           <td><%= @customer.postal_code %></td>
         </tr>
         <tr>
-          <td>住所</td>
+          <td class="align-middle bg-light">住所</td>
           <td><%= @customer.address %></td>
         </tr>
         <tr>
-          <td>電話番号</td>
+          <td class="align-middle bg-light">電話番号</td>
           <td><%= @customer.telephone_number %></td>
         </tr>
         <tr>
-          <td>メールアドレス</td>
+          <td class="align-middle bg-light">メールアドレス</td>
           <td><%= @customer.email %></td>
         </tr>
       </table>
-      <div class = "col-md-4">
-        <table class="table table-sm table-borderless">
+      <div class = "col-4">
+        <table class="table table-borderless">
           <tr>
             <td>配送先</td>
             <td><%= link_to '一覧をみる', addresses_path , class:"btn btn-primary btn-block" %></td>

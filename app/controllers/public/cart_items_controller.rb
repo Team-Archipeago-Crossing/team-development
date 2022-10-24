@@ -26,6 +26,7 @@ class Public::CartItemsController < ApplicationController
     @cart_item.update(cart_item_params)
     @customer = current_customer
     @cart_items = @customer.cart_items.all
+    flash[:notice] = "変更を保存しました。"
     redirect_to cart_items_path
   end
 
