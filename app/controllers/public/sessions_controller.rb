@@ -26,13 +26,5 @@ class Public::SessionsController < Devise::SessionsController
    end
 
 
-  # 会員の論理削除のための記述。退会後は、同じアカウントでは利用できない。
-  def reject_customer
-    @customer = Customer.find_by(email: params[:customer][:email])
-    if @customer
-      if @customer.valid_password?(params[:customer][:password]) && (@customer.is_deleted == false) #trueでは？
-        redirect_to new_customer_registration
-      end
-    end
-  end
+  
 end

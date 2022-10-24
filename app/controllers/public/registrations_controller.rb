@@ -37,7 +37,11 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # def cancel
   #   super
   # end
-
+  
+  def after_sign_in_path_for(resource)
+    customers_path
+  end
+  
    protected
 
   # If you have extra params to permit, append them to the sanitizer.
