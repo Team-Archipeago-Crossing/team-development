@@ -2,13 +2,16 @@
 <div class='container mt-3'>
   <div class='row'>
     <div class='col-10'>
-      <h2>ショッピングカート</h2>
+      <h2 class="bg-light border px-3 mb-3 d-inline-block">ショッピングカート</h2>
+      <div class="text-success">
+        <%= flash[:notice] %>
+      </div>
     </div>
     <% if @cart_items.present? %>
     <div class='col-2'>
       <%= link_to 'カートを空にする', destroy_all_cart_items_path, class: "btn btn-danger", method: :delete %>
     </div>
-    <table class="table table-bordered table-condensed">
+    <table class="table table-bordered">
       <thead class="table-light">
         <tr>
           <th>商品名</th>
@@ -40,9 +43,9 @@
       <%= link_to '買い物を続ける',root_path, class: "btn btn-primary" %>
     </div>
   <div class="col-4">
-    <table class="table table-bordered ">
+    <table class="table table-bordered">
       <tr>
-        <td>合計金額</td>
+        <td class="align-middle bg-light">合計金額</td>
         <td><%= price(@total) %></td>
       </tr>
     </table>
