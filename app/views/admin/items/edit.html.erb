@@ -1,53 +1,12 @@
 <p id="notice"></p>
 <div class="container">
-  
   <div class="row">
     <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
       <div class="my-4">
         <h4 class="col-3 bg-light text-center">商品編集</h4>
       </div>
       <div class="mx-5 my-3">
-        <%= form_with model: @item, url: admin_item_path, method: :patch do |f| %>
-          <table class="table table-borderless">
-            <tr class="form-group align-middle">
-              <th class="w-25"><%= f.label :item_image, "商品画像" %></th>
-              <td><%= f.file_field :item_image, accept: "image/*", class: "form-control" %></td>
-            </tr>
-            <tr class="form-group align-middle">
-              <th><%= f.label :name, "商品名" %></th>
-              <td><%= f.text_field :name, autocomplete: "name", class: 'form-control', placeholder: "商品名" %></td>
-            </tr>
-            <tr class="form-group">
-              <th class="pt-3"><%= f.label :introduction, "商品説明"%></th>
-              <td><%= f.text_area :introduction, class: 'form-control', placeholder: "ここに説明文を記述します", rows: "5" %></td>
-            </tr>
-            <tr class="form-group align-middle">
-              <th><%= f.label :genre_id, "ジャンル" %></th>
-              <td><%= f.select :genre_id, @genres.map{ |genre| [genre.name, genre.id]}, {include_blank: '--選択してください--'}, {class: 'form-select'} %></td>
-            </tr>
-            <tr class="form-group align-middle">
-              <th><%= f.label :price, "税抜価格" %></th>
-              <td><%= f.text_field :price, class: 'form-control', placeholder: "1000" %></td>
-              <td>円</td>
-            </tr>
-            <tr class="form-group align-middle">
-              <th><%= f.label :is_active, "販売ステータス" %></th>
-              <td>
-                <div class="w-25 d-inline-block">
-                <%= f.radio_button :is_active, :true %>
-                <%= f.label :is_active, "販売中" %>
-                </div>
-                <div class="d-inline-block">
-                <%= f.radio_button :is_active, :false %>
-                <%= f.label :is_active, "販売停止中" %>
-                </div>
-              </td>
-            </tr>
-          </table>
-          <div class="actions m-4 text-center">
-            <%= f.submit "変更を保存", class: "btn btn-success" %>
-          </div>
-        <% end %>
+        <%= render"form", genres: @genres, item: @item, url: admin_item_path, submit: "変更を保存" %>
       </div>
      </div>
   </div>
