@@ -1,0 +1,16 @@
+<% items.each do |item| %>
+	<tr>
+		<td class="text-center"><%= item.item.name %></td>
+		<td class="text-end"><%= price_taxin(item.item.price) %></td>
+		<td class="text-end"><%= item.amount %></td>
+		<td class="text-end"><%= price((item.item.price * $tax_rate).floor * item.amount) %></td>
+		<% if @update %>
+			<td>
+				<%= form_with model: item, url: admin_order_detail_path(item.id), local: false, class: "d-flex" do |f| %>
+					<%= f.select :making_status, @making_statuses, {}, class: "form-select", disabled: disabled = (@order.status == "no_payment" || @order.status == "shipped") %>
+					<%= f.submit "更新", class: "btn btn-success ms-3" unless disabled %>
+				<% end %>
+			</td>
+		<% end %>
+	</tr>
+<% end %>

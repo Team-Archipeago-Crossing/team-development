@@ -1,23 +1,25 @@
 class Admin::OrdersController < ApplicationController
 
+
 	def edit
 		@order = Order.find(params[:id])
 		@customer = @order.customer
-		@statuses = statuses
-		@making_statuses = making_statuses
+		set_valiable
 	end
 
 	def update
 		@order = Order.find(params[:id])
 		update_order_status
-		redirect_to edit_admin_order_path(@order.id)
+		set_valiable
+		render "statuses_selector"
 	end
 
 	def update_detail
 		@item = OrderDetail.find(params[:id])
 		@order = @item.order
 		update_making_status
-		redirect_to edit_admin_order_path(@order.id)
+		set_valiable
+		render "statuses_selector"
 	end
 
 
@@ -30,7 +32,13 @@ class Admin::OrdersController < ApplicationController
 
 
 	private
-	
+
+	def set_valiable
+		@statuses = statuses
+		@making_statuses = making_statuses
+		@update = true
+	end
+
 	def order_status_params
 		params.require(:order).permit(:status)
 	end
@@ -45,7 +53,8 @@ class Admin::OrdersController < ApplicationController
 			statuses.push([status[1], status[0]])
 		end
 		if @order.status == "in_producting"
-			statuses.pop(2).shift(2)
+			statuses.pop(2)
+			statuses.shift(2)
 		elsif @order.status == "no_payment" || @order.status == "paid"
 			statuses.pop(3)
 		elsif @order.status == "preparing_shipping" || @order.status == "shipped"
@@ -66,7 +75,7 @@ class Admin::OrdersController < ApplicationController
 		end
 		return statuses
 	end
-	
+
 	def update_order_status
 		@order.update(order_status_params)
 		if @order.status == "paid"
@@ -78,7 +87,7 @@ class Admin::OrdersController < ApplicationController
 				item.update(making_status: "unmakable")
 			end
 		end
-	end	
+	end
 
 	def update_making_status
 		@item.update(order_detail_status_params)

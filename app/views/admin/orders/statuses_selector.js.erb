@@ -1,0 +1,2 @@
+$(".order_statuses_selector").html(`<%= j(render "admin/orders/order_statuses_selector") %>`)
+$(".order_detail").html(`<%= j(render "admin/orders/order_detail_statuses_selector", items: @order.order_details) %>`)

@@ -1,13 +1,11 @@
 class Public::OrdersController < ApplicationController
 
 	def index
-		return redirect_to root_path unless customer_signed_in?
 		customer = current_customer
 		@orders = customer.orders.reverse
 	end
 
 	def show
-		return redirect_to root_path unless customer_signed_in?
 		@order = Order.find(params[:id])
 		@subtotal = 0
 		@order.order_details.each do |item|
@@ -16,7 +14,6 @@ class Public::OrdersController < ApplicationController
 	end
 
 	def new
-		return redirect_to root_path unless customer_signed_in?
 		@customer = current_customer
 		return redirect_to orders_path if @customer.cart_items.count == 0
 		@method_name = Order.payment_methods_i18n
@@ -26,7 +23,6 @@ class Public::OrdersController < ApplicationController
 	end
 
 	def confirm
-		return redirect_to root_path unless customer_signed_in?
 		return if @http_get = request.get?
 		new
 		if @vaildate = order_info_incomplete
