@@ -1,7 +1,7 @@
 <% content_for :title, "注文履歴詳細" %>
 <div class="mx-auto p-3 w-75">
   <h3 class="bg-light border px-3 m-0 d-inline-block">注文履歴詳細</h3>
-  <table>
+  <table class="w-75 text-nowrap">
   	<tbody>
   		<tr class="p-3">
   			<th class="p-3">購入者</th>
@@ -34,4 +34,26 @@
   		</tr>
   	</tbody>
   </table>
-  <%= render "public/orders/order_detail", items: @order.order_details %>
+  <div class="d-flex">
+    <div class="col-9">
+      <%= render "public/orders/order_detail", items: @order.order_details %>
+    </div>
+    <div class="col-3 position-relative">
+      <table class="caption-top m-0 position-absolute bottom-0 text-nowrap">
+        <tbody>
+          <tr>
+            <th class="p-3">商品合計</th>
+            <td class="p-3 text-end"><%= price(@order.total_payment - @order.shipping_cost) %></td>
+          </tr>
+          <tr>
+            <th class="p-3">送料</th>
+            <td class="p-3 text-end"><%= price(@order.shipping_cost) %></td>
+          </tr>
+          <tr>
+            <th class="p-3">請求金額合計</th>
+            <td class="p-3 text-end"><%= price(@order.total_payment) %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
