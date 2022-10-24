@@ -5,7 +5,10 @@ class Item < ApplicationRecord
 
 
   has_one_attached :item_image
-  validates :is_active, inclusion: { in: [true, false] }
+  validates :name, presence: true
+  validates :introduction, presence: true
+  validates :price, presence: true
+  validates :is_active, presence: true, inclusion: { in: [true, false] }
 
 
   def get_item_image

@@ -34,8 +34,8 @@ Rails.application.routes.draw do
 
   scope module: :public do
     get 'customers'=>'customers#show'
-    get 'customers/informetion/edit'=>'customers#edit'
-    patch 'customers/informetion'=>'customers#update'
+    get 'customers/information/edit'=>'customers#edit'
+    patch 'customers/information'=>'customers#update'
     get 'customers/disable_confirm'=>'customers#disable_confirm'
     patch 'customers/disable'
     resources :addresses, only: [:index,:edit,:create,:update,:destroy]

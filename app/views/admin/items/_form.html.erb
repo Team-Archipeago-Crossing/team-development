@@ -14,7 +14,8 @@
   </tr>
   <tr class="form-group align-middle">
     <th><%= f.label :genre_id, "ジャンル" %></th>
-    <td><%= f.select :genre_id, genres.map{ |genre| [genre.name, genre.id]}, {include_blank: '--選択してください--'}, {class: 'form-select'} %></td>
+    <%#= f.select :genre_id, genres.map{ |genre| [genre.name, genre.id]}, {include_blank: '--選択してください--'}, {class: 'form-select'} %>
+    <td><%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name), {include_blank: '--選択してください--'}, {class: 'form-select'} %></td>
   </tr>
   <tr class="form-group align-middle">
     <th><%= f.label :price, "税抜価格" %></th>
