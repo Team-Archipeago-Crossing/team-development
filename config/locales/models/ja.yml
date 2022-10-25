@@ -2,6 +2,7 @@ ja:
   activerecord:
     models:
       item: 商品
+      genre: ジャンル
     attributes:
       item:
         name: 商品名
