@@ -3,7 +3,11 @@
     <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-7">
       <div class="my-4">
         <h4 class="col-3 bg-light text-center">管理者ログイン</h4>
-        <%= render "public/shared/error_messages", resource: resource %>
+        <div class="text-danger">
+          <% flash.each do |message_type, message| %>
+            <%= content_tag :div, message, class: message_type %>
+          <% end %>
+        </div>
       </div>
       <div class="mx-5 my-3">
         <%= form_with model: @admin, url: admin_session_path, local: true do |f| %>
