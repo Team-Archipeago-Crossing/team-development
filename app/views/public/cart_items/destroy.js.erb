@@ -1,0 +1,20 @@
+var set_time = 0
+
+<% if @id %>
+
+	set_time = 400
+
+	$(".cart_item_<%= @id %>").fadeOut(set_time)
+	setTimeout(function(){
+		$(".total_payment").html("<%= price(@subtotal) %>")
+	}, set_time);
+	
+<% end %>
+	
+<% unless @cart_items.present? %>
+	setTimeout(function(){
+		$(".destroy_all").html("");
+		$(".items_list").html("<%= j(render "public/cart_items/no_items") %>");
+	}, set_time);
+
+<% end %>

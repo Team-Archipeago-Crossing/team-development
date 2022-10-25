@@ -1,4 +1,4 @@
-	<table class="table table-bordered caption-top align-middle">
+	<table class="table table-bordered caption-top align-middle text-nowrap">
 		<caption>注文内容</caption>
 		<thead>
 			<tr>
@@ -6,27 +6,12 @@
 				<th class="text-center bg-light">単価 (税込)</th>
 				<th class="text-center bg-light">数量</th>
 				<th class="text-center bg-light">小計</th>
-				<% if !params[:id].nil? &&  request.path_info == edit_admin_order_path %>
-					<th class="text-center bg-light">製作ステータス</td>
+				<% if @update %>
+					<th class="making_status text-center bg-light">製作ステータス</td>
 				<% end %>
 			</tr>
 		</thead>
-		<tbody>
-			<% items.each do |item| %>
-				<tr>
-					<td class="text-center"><%= item.item.name %></td>
-					<td class="text-end"><%= price_taxin(item.item.price) %></td>
-					<td class="text-end"><%= item.amount %></td>
-					<td class="text-end"><%= price((item.item.price * $tax_rate).floor * item.amount) %></td>
-					<% if !params[:id].nil? && request.path_info == edit_admin_order_path %>
-						<td>
-							<%= form_with model: item, url: admin_order_detail_path(item.id), class: "d-flex" do |f| %>
-								<%= f.select :making_status, @making_statuses, {}, class: "form-select", disabled: disabled = (@order.status == "no_payment" || @order.status == "shipped") %>
-								<%= f.submit "更新", class: "btn btn-success ms-3" unless disabled %>
-							<% end %>
-						</td>
-					<% end %>
-				</tr>
-			<% end %>
+		<tbody class="order_detail">
+			<%= render "admin/orders/order_detail_statuses_selector", items: items %>
 		</tbody>
 	</table>
