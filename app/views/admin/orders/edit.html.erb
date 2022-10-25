@@ -41,19 +41,19 @@
       <%= render "public/orders/order_detail", items: @order.order_details %>
     </div>
     <div class="col-3 position-relative">
-      <table class="caption-top m-0 position-absolute bottom-0 text-nowrap">
+      <table class="caption-top mb-3 position-absolute bottom-0 text-nowrap">
         <tbody>
           <tr>
-            <th class="p-3">商品合計</th>
-            <td class="p-3 text-end"><%= price(@order.total_payment - @order.shipping_cost) %></td>
+            <th class="p-2">商品合計</th>
+            <td class="p-2 text-end"><%= price(@order.total_payment - @order.shipping_cost) %></td>
           </tr>
           <tr>
-            <th class="p-3">送料</th>
-            <td class="p-3 text-end"><%= price(@order.shipping_cost) %></td>
+            <th class="p-2">送料</th>
+            <td class="p-2 text-end"><%= price(@order.shipping_cost) %></td>
           </tr>
           <tr>
-            <th class="p-3">請求金額合計</th>
-            <td class="p-3 text-end"><%= price(@order.total_payment) %></td>
+            <th class="p-2">請求金額合計</th>
+            <td class="p-2 text-end"><%= price(@order.total_payment) %></td>
           </tr>
         </tbody>
       </table>
