@@ -1,0 +1,14 @@
+ja:
+  activerecord:
+    models:
+      item: 商品
+      genre: ジャンル
+    attributes:
+      item:
+        name: 商品名
+        introduction: 商品説明
+        price: 税抜価格
+        is_active: 販売ステータス
+        genre_id: ジャンル名
+      genre:
+        name: ジャンル名
