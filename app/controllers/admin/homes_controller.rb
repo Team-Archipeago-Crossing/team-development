@@ -1,5 +1,6 @@
 class Admin::HomesController < ApplicationController
 
+
   def top
     if @custmoer_search = !params[:customer_id].nil?
       @customer = Customer.find(params[:customer_id])

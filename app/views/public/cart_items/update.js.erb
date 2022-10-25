@@ -1,0 +1,30 @@
+$(".cart_item_<%= @cart_item.item.id %>>div").html("<%= j(render "public/cart_items/change_amount_form", cart_item: @cart_item) %>")
+$(".total_payment").html("<%= price(@subtotal) %>")
+
+$(".cart_item_<%= @cart_item.item.id %> .subtotal, .total_payment").css({
+	"background-color" : "var(--bs-warning)",
+	"transition"			 : "none"
+});
+
+setTimeout(function(){
+	$(".cart_item_<%= @cart_item.item.id %> .subtotal, .total_payment").css({
+		"background-color" : "unset",
+		"transition"			 : "all 1.5s"
+	});
+}, 1);
+
+$(".success_message").html("変更を保存しました。");
+
+$(".success_message").css({
+	"visibility" : "visible",
+	"opacity"		 : "1",
+	"transition" : "all 0.1s"
+});
+
+setTimeout(function(){
+	$(".success_message").css({
+		"visibility" : "hidden",
+		"opacity"		 : "0",
+		"transition" : "all 1s"
+	});
+}, 3000);

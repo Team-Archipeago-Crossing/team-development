@@ -30,6 +30,7 @@ class Admin::ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     if @item.update(item_params)
+      @item.cart_items.destroy_all unless @item.is_active
       redirect_to admin_item_path(@item), notice: "商品の編集が成功しました"
     else
       render :edit

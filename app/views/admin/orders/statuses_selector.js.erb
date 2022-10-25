@@ -1,0 +1,16 @@
+$(".order_statuses_selector").html(`<%= j(render "admin/orders/order_statuses_selector") %>`)
+$(".order_detail").html(`<%= j(render "admin/orders/order_detail_statuses_selector", items: @order.order_details) %>`)
+
+$(".success_message").css({
+	"visibility" : "visible",
+	"opacity"		 : "1",
+	"transition" : "all 0.1s"
+});
+
+setTimeout(function(){
+	$(".success_message").css({
+		"visibility" : "hidden",
+		"opacity"		 : "0",
+		"transition" : "all 1s"
+	});
+}, 3000);
