@@ -2,6 +2,9 @@
   <div class='row'>
     <div class='col-md-8 '>
       <h2>ジャンル一覧・追加</h2>
+      <div class="text-danger">
+        <%= render"layouts/errors", obj: @genre %>
+      </div>
       <%= form_with model: @genre,url: admin_genre_path,method: :patch do |f| %>
       <table class="table table-sm table-borderless">
         <tr>

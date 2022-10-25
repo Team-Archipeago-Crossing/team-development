@@ -59,3 +59,4 @@ gem "devise"
 gem 'kaminari','~> 1.2.1'
 gem 'enum_help'
 gem 'rspec-rails'
+gem 'rails-i18n'
