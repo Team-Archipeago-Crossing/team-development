@@ -23,6 +23,7 @@ class Public::CartItemsController < ApplicationController
     @cart_item = CartItem.find(params[:id])
     @cart_item.update(cart_item_params)
     calc_subtotal
+    flash[:notice] = "変更を保存しました。"
   end
 
   def destroy

@@ -2,16 +2,22 @@
 <div class='container mt-3'>
   <div class='row'>
     <div class='col-md-8'>
-      <h2>配送先登録/一覧</h2>
+      <h2 class="bg-light border px-3 mb-3 d-inline-block">配送先登録/一覧</h2>
+      <div class="text-success">
+        <%= flash[:notice] %>
+      </div>
+      <div class="text-danger">
+        <%= flash[:alret] %>
+      </div>
       <%= form_with model: @address do |f| %>
-      <table class="table table-sm table-borderless">
+      <table class="table table-borderless text-nowrap">
         <tr>
           <td>郵便番号(ハイフンなし)</td>
           <td><%= f.text_field :postal_code %></td>
         </tr>
         <tr>
           <td>住所</td>
-          <td><%= f.text_field :address ,size: "63" %></td>
+          <td><%= f.text_field :address ,size: "60" %></td>
         </tr>
         <tr>
           <td>宛名</td>
@@ -28,13 +34,15 @@
   </div>
   <div class='row'>
 
-    <table class="table table-bordered table-condensed">
+    <table class="table table-bordered">
+      <thead class="table-light">
       <tr>
         <th>郵便番号</th>
         <th>住所</th>
         <th>宛名</th>
         <th></th>
       </tr>
+      </thead>
       <% @addresses.each do |address| %>
       <tr>
         <td><%= address.postal_code %></td>

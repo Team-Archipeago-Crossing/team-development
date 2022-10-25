@@ -1,2 +1,16 @@
 $(".cart_item_<%= @cart_item.item.id %>").html("<%= j(render "public/cart_items/change_amount_form", cart_item: @cart_item) %>")
 $(".total_payment").html("<%= price(@subtotal) %>")
+
+$(".success_message").css({
+	"visibility" : "visible",
+	"opacity"		 : "1",
+	"transition" : "all 0.1s"
+});
+
+setTimeout(function(){
+	$(".success_message").css({
+		"visibility" : "hidden",
+		"opacity"		 : "0",
+		"transition" : "all 1s"
+	});
+}, 3000);
