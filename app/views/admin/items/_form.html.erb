@@ -1,5 +1,5 @@
 <%= form_with model: item, url: url do |f| %>
-<table class="table table-borderless">
+<table class="table table-borderless text-nowrap">
   <tr class="form-group align-middle">
     <th class="w-25"><%= f.label :item_image, "商品画像" %></th>
      <td><%= f.file_field :item_image, accept: "image/*", class: "form-control" %></td>
@@ -22,7 +22,7 @@
     <td><%= f.text_field :price, class: 'form-control w-100', placeholder: "1000" %></td>
     <td>円</td>
   </tr>
-  <tr class="form-group align-middle">
+  <tr class="form-group align-middle text-nowrap">
     <th><%= f.label :is_active, "販売ステータス" %></th>
     <td>
       <div class="w-25 d-inline-block">

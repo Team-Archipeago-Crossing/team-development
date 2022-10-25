@@ -4,10 +4,12 @@
     <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
       <div class="my-4">
         <h4 class="col-3 bg-light text-center">商品新規登録</h4>
-        <%= render"layouts/errors", obj: @item %>
+        <div class="text-danger">
+          <%= render"layouts/errors", obj: @item %>
+        </div>
       </div>
       <div class="mx-5 my-3">
-        <%= render"form", genres: @genres, item: @item, url: admin_items_path, submit: "新規登録" %>
+        <%= render"form", item: @item, url: admin_items_path, submit: "新規登録" %>
       </div>
      </div>
   </div>
