@@ -1,57 +1,59 @@
 <% content_for :title, "注文履歴詳細" %>
 <div class="mx-auto p-3 w-75">
-  <h3 class="bg-light border px-3 m-0 d-inline-block">注文履歴詳細</h3>
-  <table class="w-75 text-nowrap">
-  	<tbody>
-  		<tr class="p-3">
-  			<th class="p-3">購入者</th>
-  			<td class="p-3"><%= link_to "#{@customer.last_name} #{@customer.first_name}", admin_customer_path(@customer.id) %>
-  		</tr>
-  		<tr>
-  			<th class="p-3">注文日</th>
-  			<td class="p-3"><%= @order.created_at.localtime("+09:00").strftime("%Y年%-m月%-d日")  %></td>
-  		</tr>
-  		<tr>
-  			<th class="p-3">配送先</th>
-  			<td class="p-3">
-  				<%= "〒#{@order.postal_code}　#{@order.address}" %>
-  				<br>
-  				<%= @order.name %>
-  			</td>
-  		</tr>
-  		<tr>
-  			<th class="p-3">支払方法</th>
-  			<td class="p-3"><%= @order.payment_method_i18n %></td>
-  		</tr>
-  		<tr>
-  			<th class="p-3">注文ステータス</th>
-  			<td class="p-3">
-  				<%= form_with model: @order, url: admin_order_path, class: "d-flex" do |f| %>
-  				  <%= f.select :status, @statuses, {}, class: "form-select", disabled: disabled = (@order.status == "in_producting") %>
-  				  <%= f.submit "更新", class: "btn btn-success ms-3" unless @order.status == "in_producting" %>
-  				<% end %>
-  			</td>
-  		</tr>
-  	</tbody>
+	<div class="align-items-center d-flex mb-3">
+    <h3 class="bg-light border px-3 m-0 d-inline-block">注文履歴詳細</h3>
+  </div>
+  <table class="text-nowrap">
+    <tbody>
+      <tr class="p-3">
+      <th class="p-3">購入者</th>
+        <td class="p-3" colspan="2"><%= link_to "#{@customer.last_name} #{@customer.first_name}", admin_customer_path(@customer.id) %>
+      </tr>
+      <tr>
+        <th class="p-3">注文日</th>
+        <td class="p-3" colspan="2"><%= @order.created_at.localtime("+09:00").strftime("%Y年%-m月%-d日")  %></td>
+      </tr>
+      <tr>
+      <th class="p-3">配送先</th>
+        <td class="p-3" colspan="2">
+          <%= "〒#{@order.postal_code}　#{@order.address}" %>
+          <br>
+          <%= @order.name %>
+        </td>
+      </tr>
+      <tr>
+        <th class="p-3">支払方法</th>
+        <td class="p-3" colspan="2"><%= @order.payment_method_i18n %></td>
+      </tr>
+      <tr>
+        <th class="p-3">注文ステータス</th>
+        <td class="p-3 order_statuses_selector">
+          <%= render "order_statuses_selector" %>
+        </td>
+        <td>
+          <h5 class="success_message mx-2 my-0 p-1 d-inline-block text-success" style="visibility: hidden; opacity: 0;">ステータスを更新しました</h5>
+        </td>
+      </tr>
+    </tbody>
   </table>
   <div class="d-flex">
     <div class="col-9">
       <%= render "public/orders/order_detail", items: @order.order_details %>
     </div>
     <div class="col-3 position-relative">
-      <table class="caption-top m-0 position-absolute bottom-0 text-nowrap">
+      <table class="caption-top mb-3 position-absolute bottom-0 text-nowrap">
         <tbody>
           <tr>
-            <th class="p-3">商品合計</th>
-            <td class="p-3 text-end"><%= price(@order.total_payment - @order.shipping_cost) %></td>
+            <th class="p-2">商品合計</th>
+            <td class="p-2 text-end"><%= price(@order.total_payment - @order.shipping_cost) %></td>
           </tr>
           <tr>
-            <th class="p-3">送料</th>
-            <td class="p-3 text-end"><%= price(@order.shipping_cost) %></td>
+            <th class="p-2">送料</th>
+            <td class="p-2 text-end"><%= price(@order.shipping_cost) %></td>
           </tr>
           <tr>
-            <th class="p-3">請求金額合計</th>
-            <td class="p-3 text-end"><%= price(@order.total_payment) %></td>
+            <th class="p-2">請求金額合計</th>
+            <td class="p-2 text-end"><%= price(@order.total_payment) %></td>
           </tr>
         </tbody>
       </table>

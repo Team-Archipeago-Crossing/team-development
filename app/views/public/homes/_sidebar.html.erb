@@ -1,4 +1,6 @@
 <div class="sidebar col-3 bg-warning p-5">
+  <%# フラッシュメッセージ見えないように表示しています ※トップ画面に表示しないと他のviewにログイン関係のメッセージが表示されてしまうため%>
+  <p class="opacity-0"><%= flash[:notice] %></p>
   <table class="text-center mx-auto border border-dark">
     <thead class="border border-dark">
      <tr>

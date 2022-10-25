@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="mx-auto col-11 col-sm-10">
+      <%= flash[:notice] %>
       <div class="my-4 d-flex">
         <h4 class="bg-light text-center px-2">
           <%= "#{@customer.last_name} #{@customer.first_name} さんの" if @custmoer_search %>注文履歴<%= "一覧" unless @custmoer_search %>

@@ -1,13 +1,11 @@
 class Public::OrdersController < ApplicationController
 
 	def index
-		return redirect_to root_path unless customer_signed_in?
 		customer = current_customer
 		@orders = customer.orders.reverse
 	end
 
 	def show
-		return redirect_to root_path unless customer_signed_in?
 		@order = Order.find(params[:id])
 		@subtotal = 0
 		@order.order_details.each do |item|
@@ -16,7 +14,6 @@ class Public::OrdersController < ApplicationController
 	end
 
 	def new
-		return redirect_to root_path unless customer_signed_in?
 		@customer = current_customer
 		return redirect_to orders_path if @customer.cart_items.count == 0
 		@method_name = Order.payment_methods_i18n
@@ -26,15 +23,10 @@ class Public::OrdersController < ApplicationController
 	end
 
 	def confirm
-		return redirect_to root_path unless customer_signed_in?
 		return if @http_get = request.get?
 		new
-		if @vaildate = order_info_incomplete
-			@select_address_value = params[:address][:select_address]
-			@payment_method_value = params[:address][:payment_method]
-			@addresses_list_value = params[:address][:addresses_list]
+		if @validate = order_info_incomplete
 			@address_params = address_params
-			render "new"
 		else
 			save_temporary_data
 		end
@@ -86,7 +78,7 @@ class Public::OrdersController < ApplicationController
 		selected_address = Address.find_by(id: params[:address][:addresses_list].to_i)
 		if params[:address][:select_address].to_i == 0
 			using_address = Address.new(address: @customer.address, name: "#{@customer.last_name} #{@customer.first_name}", postal_code: @customer.postal_code)
-		elsif params[:address][:select_address].to_i == 1 && selected_address.customer == @customer
+		elsif params[:address][:select_address].to_i == 1
 			using_address = selected_address
 		elsif params[:address][:select_address].to_i == 2
 			using_address = @customer.addresses.new(address_params)
@@ -113,13 +105,13 @@ class Public::OrdersController < ApplicationController
 
 	def order_info_incomplete
 		par = params[:address]
-		address_list = Address.find_by(id: par[:addresses_list])
+		p address_list = Address.find_by(id: par[:addresses_list])
 		postal_code = par[:postal_code]
 		address = par[:address]
 		address_name = par[:name]
 		@payment_method_unchecked = par[:payment_method].nil?
 		@select_address_unchecked = par[:select_address].nil?
-		@addresses_list_incorrect = par[:select_address] == "1" && address_list.nil?# && address_list.customer_id == current_user.id
+		@addresses_list_incorrect = par[:select_address] == "1" && (address_list.nil? || address_list.customer_id != current_customer.id)
 		@postal_code_incorrect = par[:select_address] == "2" && (postal_code.length != 7 || (postal_code =~ /\A[0-9]+\z/) == nil)
 		@address_blank = par[:select_address] == "2" && address == ""
 		@name_blank = par[:select_address] == "2" && address_name == ""

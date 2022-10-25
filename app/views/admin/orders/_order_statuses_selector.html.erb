@@ -1,0 +1,4 @@
+<%= form_with model: @order, url: admin_order_path(@order.id), local: false, class: "d-flex" do |f| %>
+  <%= f.select :status, @statuses, {}, class: "form-select", disabled: disabled = (@order.status == "in_producting") %>
+  <%= f.submit "更新", class: "btn btn-success ms-3" unless @order.status == "in_producting" %>
+<% end %>
