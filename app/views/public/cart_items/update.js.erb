@@ -1,4 +1,4 @@
-$(".cart_item_<%= @cart_item.item.id %>>div").html("<%= j(render "public/cart_items/change_amount_form", cart_item: @cart_item) %>")
+$(".cart_item_<%= @cart_item.item.id %> .subtotal").html("<%= price(@cart_item.subtotal) %>")
 $(".total_payment").html("<%= price(@subtotal) %>")
 
 $(".cart_item_<%= @cart_item.item.id %> .subtotal, .total_payment").css({
