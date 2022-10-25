@@ -10,7 +10,6 @@
 		<h5>支払方法</h5>
 		<div>
 			<%= f.radio_button :payment_method, :credit %>
-			<%# p params[:address][:payment_method] %>
 			<%= f.label :payment_method, @method_name[:credit], value: :credit %>
 		</div>
 		<div>
