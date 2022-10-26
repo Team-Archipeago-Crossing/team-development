@@ -16,7 +16,7 @@
 				<%= f.submit "カートに入れる", class: "btn btn-success" %>
 			<% end %>
 		<% else %>
-			<p class="m-5 p-2 border border-warning text-center">
+			<p class="m-5 p-2 border border-<%= @item.is_active ? "warning" : "danger" %> text-center">
 				<%= @item.is_active ? "購入するにはログインしてください。" : "販売停止中" %>
 			</p>
 		<% end %>
