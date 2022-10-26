@@ -1,6 +1,9 @@
 <% content_for :title, "会員詳細" %>
 <div class="mx-auto p-3 w-75">
 	<h3 class="bg-light border px-3 mb-3 d-inline-block"><%= "#{@customer.last_name} #{@customer.first_name} " %>さんの会員詳細</h3>
+	<div class="text-success">
+    <%= flash[:notice] %>
+  </div>
 	<table>
 		<tbody>
 			<tr>
