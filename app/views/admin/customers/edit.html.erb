@@ -1,5 +1,8 @@
 <div class="mx-auto p-3 w-75">
   <h3 class="bg-light border px-3 m-0 d-inline-block">会員情報編集</h3>
+  <div class="text-danger m-2">
+    <%= render"layouts/errors", obj: @customer %>
+  </div>
   <%= form_with model: @customer, url: admin_customer_path(@customer.id), method: :patch do |f| %>
   <table class="table table-sm table-borderless">
     <tbody class="align-middle">
