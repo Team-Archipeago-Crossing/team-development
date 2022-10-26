@@ -1,12 +1,12 @@
 <% content_for :title, "ショッピングカート" %>
 <div class='container mt-3'>
   <div class='row'>
-    <div class='col-10 d-flex mb-3 align-items-center'>
+    <div class='col-9 d-flex mb-3 align-items-center'>
       <h2 class="bg-light border px-3 m-0 d-inline-block">ショッピングカート</h2>
         <h5 class="text-success d-inline-block mx-2 my-0 p-1 success_message" style="visibility: hidden;"></h5>
     </div>
     <% if @cart_items.present? %>
-      <div class='col-2 destroy_all'>
+      <div class='col-3 text-end destroy_all'>
         <%= link_to 'カートを空にする', destroy_all_cart_items_path, class: "btn btn-danger text-nowrap", method: :delete, remote: true %>
       </div>
       <div class="items_list">
