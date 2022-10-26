@@ -61,11 +61,23 @@
   flex-wrap: wrap;
 }
 
+.item_box, .card{
+  border-radius: 6px;
+}
+
+.item_box .card:hover{
+  opacity: 0.9;
+  transition: 0.25s;
+}
+
 .item_box{
   width: 220px;
   text-align: center;
   margin: 10px 5px 0;
-  transition: 0.4s;
+}
+
+.item_box:hover{
+  background-color: black;
 }
 
 .item_box_space{
@@ -78,14 +90,13 @@
   margin-top: auto;
 }
 
-.item_box:hover{
-  background-color: #eee;
-  transition: 0.4s;
-}
-
 .item_box_inner{
   height: 100%;
   width: 100%;
+}
+
+.item_box .card{
+  overflow: hidden;
 }
 
 .item_box img{
