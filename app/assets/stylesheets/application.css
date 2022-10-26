@@ -86,9 +86,8 @@
 
 .item_box:not(.discontinued):hover, .item_box.discontinued{
   background-color: black;
+  cursor: default;
 }
-
-
 
 .item_box_space{
   height: 0;
