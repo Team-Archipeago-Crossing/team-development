@@ -1,8 +1,8 @@
 <div class="item_list d-flex mx-auto justify-content-center">
   <% items.each do |item| %>
-    <div>
+    <div class=" item_box">
       <%= link_to item_path(item.id), class: "text-decoration-none text-dark" do %>
-        <div class="card item_box">
+        <div class="card">
           <%= image_tag item.get_item_image, height: "200" %>
           <div class="card-body">
             <p class="card-title font-weight-bold"><%= item.name %></p>
@@ -11,7 +11,6 @@
         </div>
       <% end %>
     </div>
-
   <% end %>
     <div class="item_box_space"></div>
     <div class="item_box_space"></div>
