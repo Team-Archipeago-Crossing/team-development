@@ -18,6 +18,10 @@
    padding: 0;
    margin: 0;
  }
+ 
+ .profiler-results{
+   display: none;
+ }
 
  p{
    margin-bottom: 0 !important;
@@ -66,8 +70,12 @@
   transition: all 0.25s;
 }
 
-.item_box .card:hover{
+.item_box .card:not(.discontinued *):hover{
   opacity: 0.9;
+}
+
+.item_box.discontinued .card{
+  opacity: 0.5;
 }
 
 .item_box{
@@ -76,9 +84,11 @@
   margin: 10px 5px 0;
 }
 
-.item_box:hover{
+.item_box:not(.discontinued):hover, .item_box.discontinued{
   background-color: black;
 }
+
+
 
 .item_box_space{
   height: 0;
