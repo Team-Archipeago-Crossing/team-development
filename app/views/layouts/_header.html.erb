@@ -1,9 +1,8 @@
-<header class="d-flex justify-content-between bg-light border-bottom">
+<header class="d-flex justify-content-between bg-light border-bottom align-items-center">
   <div class="logo_area">
-    <div class="logo px-5 py-3 m-2 h3 border border-success">
+    <div class="logo p-0 m-2 h3 border border-success">
       <%= link_to root_path do %>
-        <%# ↓の代わりににlogoが入る予定 %>
-        <div>ＬＯＧＯ</div>
+        <div id="logo"></div>
       <% end %>
     </div>
   </div>
@@ -37,7 +36,7 @@
     </div>
     <div class="search_area m-2">
       <%= form_with url: search_path, class: "input-group ms-auto", method: :get do |f| %>
-        <%= f.text_field :search, class: "form-control rounded-start", placeholder: "検索" %>
+        <%= f.text_field :search, class: "form-control rounded-start", placeholder: "検索", value: @query %>
         <div class="input-group-append">
           <%= f.button :type => "submit", name: nil, class: " btn btn-outline-secondary rounded-0 rounded-end " do %>
             <i class="fa-solid fa-magnifying-glass"></i>

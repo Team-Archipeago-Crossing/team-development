@@ -23,11 +23,26 @@
    margin-bottom: 0 !important;
  }
 
-.sidebar table th, .sidebar table td{
+#logo{
+  background-image: url("/images/logo.png");
+  background-size: cover;
+  background-position: center;
+  height: 90px;
+  width: 160px;
+}
+
+.sidebar table td{
+  padding: 0;
+}
+
+.sidebar table td a{
+  display: block;
   padding: 5px 20px;
 }
 
-
+.sidebar{
+  background-color: #fffcd3;
+}
 
 #main_visual{
   height: 300px;
