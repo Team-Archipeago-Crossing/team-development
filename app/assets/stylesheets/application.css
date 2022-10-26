@@ -63,9 +63,8 @@
 
 .item_box, .card{
   border-radius: 6px;
-  transition: all 0.35s;
+  transition: all 0.25s;
 }
-
 
 .item_box .card:hover{
   opacity: 0.9;
