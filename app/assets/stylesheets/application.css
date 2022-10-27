@@ -112,6 +112,12 @@
   object-fit: cover;
 }
 
+.item_box .card-body p{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .pagination{
   justify-content: center;
   margin-top: 20px;
