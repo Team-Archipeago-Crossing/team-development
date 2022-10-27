@@ -1,7 +1,7 @@
 <% content_for :title, @item.name %>
 <%= render "public/homes/sidebar" %>
 <div class="col-9">
-	<% if @order_times > 1 %>
+	<% if @order_times > 0 %>
 	<div class="m-2 p-3 d-inline-block border border-2 border-info rounded ">
 		<h6>購入回数：<%= @order_times %>回</h6>
 		<p>前回の購入日：<%= link_to @last_order.created_at.strftime("%Y年%-m月%-d日"), order_path(@last_order.id) %></p>
