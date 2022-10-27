@@ -25,6 +25,7 @@ class Admin::ItemsController < ApplicationController
   def edit
     @item = Item.find(params[:id])
     @genres = Genre.all
+    @genre_selector = @item.genre_id
   end
 
   def update
