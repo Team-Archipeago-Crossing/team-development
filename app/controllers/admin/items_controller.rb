@@ -14,6 +14,7 @@ class Admin::ItemsController < ApplicationController
     if @item.save
       redirect_to admin_item_path(@item), notice: "商品の新規登録に成功しました."
     else
+      p @genre_selector = params[:item][:genre_id]
       render :new
     end
   end
@@ -34,6 +35,7 @@ class Admin::ItemsController < ApplicationController
       @item.cart_items.destroy_all unless @item.is_active
       redirect_to admin_item_path(@item), notice: "商品の編集が成功しました"
     else
+      @genre_selector = params[:item][:genre_id]
       render :edit
     end
   end
