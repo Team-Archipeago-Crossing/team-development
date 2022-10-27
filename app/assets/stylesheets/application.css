@@ -18,6 +18,10 @@
    padding: 0;
    margin: 0;
  }
+ 
+ .profiler-results{
+   display: none;
+ }
 
  p{
    margin-bottom: 0 !important;
@@ -41,7 +45,7 @@
 }
 
 .sidebar{
-  background-color: #fffcd3;
+  background-color: aliceblue;
 }
 
 #main_visual{
@@ -61,12 +65,28 @@
   flex-wrap: wrap;
 }
 
+.item_box, .card{
+  border-radius: 6px;
+  transition: all 0.25s;
+}
+
+.item_box .card:not(.discontinued *):hover{
+  opacity: 0.9;
+}
+
+.item_box.discontinued .card{
+  opacity: 0.5;
+}
+
 .item_box{
-  height: 250px;
   width: 220px;
   text-align: center;
   margin: 10px 5px 0;
-  transition: 0.4s;
+}
+
+.item_box:not(.discontinued):hover, .item_box.discontinued{
+  background-color: black;
+  cursor: default;
 }
 
 .item_box_space{
@@ -79,14 +99,13 @@
   margin-top: auto;
 }
 
-.item_box:hover{
-  background-color: #eee;
-  transition: 0.4s;
-}
-
 .item_box_inner{
   height: 100%;
   width: 100%;
+}
+
+.item_box .card{
+  overflow: hidden;
 }
 
 .item_box img{

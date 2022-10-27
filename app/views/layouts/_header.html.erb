@@ -11,7 +11,7 @@
       <% if !admin_signed_in? %>
         <% if customer_signed_in? %>
           <div class="d-inline-block my-auto me-2">
-            <p class="fw-bold"><%= "#{current_customer.last_name} #{current_customer.first_name} さん" %> こんにちは</p>
+            <p class="fw-bold"><%= "ようこそ、#{current_customer.last_name}#{current_customer.first_name}さん！" %></p>
           </div>
           <%= link_to "マイページ", customers_path, class: "btn btn-outline-dark ms-1" %>
         <% else %>

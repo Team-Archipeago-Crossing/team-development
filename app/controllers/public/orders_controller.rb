@@ -7,6 +7,7 @@ class Public::OrdersController < ApplicationController
 
 	def show
 		@order = Order.find(params[:id])
+		return redirect_to customers_path unless @order.customer == current_customer
 		@subtotal = 0
 		@order.order_details.each do |item|
 			@subtotal += (item.item.price * $tax_rate).floor * item.amount
