@@ -1,6 +1,7 @@
 class Public::CartItemsController < ApplicationController
 
   def create
+    customer = current_customer
     cart_items = current_customer.cart_items
     item_id = params[:cart_item][:item_id]
     return redirect_back fallback_location: item_path(item_id) unless Item.find(item_id).is_active
@@ -32,7 +33,6 @@ class Public::CartItemsController < ApplicationController
     cart_item.destroy
     calc_subtotal
     @cart_items = @customer.cart_items
-    #if @cart_items.count == 0
   end
 
   def destroy_all

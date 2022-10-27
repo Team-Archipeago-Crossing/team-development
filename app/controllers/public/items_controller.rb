@@ -9,7 +9,7 @@ class Public::ItemsController < ApplicationController
     @cart_item = CartItem.new
     purchase_history = current_customer.past_order_details.reverse_order
     @order_times = purchase_history.count{|i| i.item_id == @item.id}
-    @last_order = purchase_history.find_by(item_id: @item.id).order
+    @last_order = purchase_history.find_by(item_id: @item.id).order if @order_times > 0
 	end
 
 end

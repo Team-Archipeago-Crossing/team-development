@@ -90,7 +90,7 @@ class Public::OrdersController < ApplicationController
 		$order.address = using_address.address
 		$order.payment_method = params[:address][:payment_method]
 
-		@items = CartItem.all #@customer.cart_items
+		@items = @customer.cart_items
 		@subtotal = 0
 		@items.each do |item|
 			@subtotal += (item.item.price * $tax_rate).floor * item.amount
