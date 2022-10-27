@@ -1,0 +1,63 @@
+<div class="mx-auto p-3 w-75">
+  <h3 class="bg-light border px-3 m-0 d-inline-block">会員情報編集</h3>
+  <div class="text-danger m-2">
+    <%= render"layouts/errors", obj: @customer %>
+  </div>
+  <%= form_with model: @customer, url: admin_customer_path(@customer.id), method: :patch do |f| %>
+  <table class="table table-sm table-borderless">
+    <tbody class="align-middle">
+      <tr>
+        <td class="p-3">会員ID</td>
+        <td class="p-3"><%= @customer.id %></td>
+      </tr>
+      <tr>
+        <td class="p-3">氏名</td>
+        <td class="p-3">
+          <%= f.text_field :last_name, class: "form-control" %>
+          <%= f.text_field :first_name, class: "form-control" %>
+        </td>
+      </tr>
+      <tr>
+        <td class="p-3">フリガナ</td>
+        <td class="p-3">
+          <%= f.text_field :last_name_kana, class: "form-control" %>
+          <%= f.text_field :first_name_kana, class: "form-control" %>
+        </td>
+      </tr>
+      <tr>
+        <td class="p-3">郵便番号</td>
+        <td class="p-3"><%= f.text_field :postal_code, class: "form-control" %></td>
+      </tr>
+      <tr>
+        <td class="p-3">住所</td>
+        <td class="p-3"><%= f.text_field :address, class: "form-control w-50" %></td>
+      </tr>
+      <tr>
+        <td class="p-3">電話番号</td>
+        <td class="p-3"><%= f.text_field :telephone_number, class: "form-control" %></td>
+      </tr>
+      <tr>
+        <td class="p-3">メールアドレス</td>
+        <td class="p-3"><%= f.email_field :email, class: "form-control w-50" %></td>
+      </tr>
+      <tr>
+        <td class="p-3">会員ステータス</td>
+        <td class="p-3">
+          <span class="pe-4">
+            <%= f.radio_button :is_deleted, false %><%= f.label :is_deleted, "有効", value: false, class: "px-2" %>
+          </span>
+          <span class="pe-4">
+            <%= f.radio_button :is_deleted, true %><%= f.label :is_deleted, "退会", value: true, class: "px-2" %>
+          </span>
+        </td>
+      </tr>
+      <tr>
+        <td colspan=2 class="text-center">
+          <%= f.submit "編集内容を保存", class: 'btn btn-success' %>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+  <% end %>
+</div>

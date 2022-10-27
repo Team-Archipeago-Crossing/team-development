@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>WorkGithub</title>
+    <title><%= content_for?(:title) ? "#{yield(:title)} - ながのCAKE" : "ながのCAKE"%></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%#= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/13f2c566e6.js" crossorigin="anonymous"></script>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="container">
+    <%= render "layouts/header" %>
+    <main class="d-flex">
+      <%= yield %>
+    </main>
+
+    <footer class="bg-header border-top p-1 bg-light">
+      <p class="my-3 mx-auto w-auto text-center">- Nagano cake -</p>
+    </footer>
   </body>
 </html>

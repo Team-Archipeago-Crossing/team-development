@@ -1,0 +1,27 @@
+<% content_for :title, "TOP" %>
+<%# サイドバー %>
+<%= render "public/homes/sidebar" %>
+<div class="col-9">
+  <div id="main_visual" class="d-flex">
+    <div id="main_visual_text" class="m-auto border border-dark rounded">
+      <p class="m-3">
+        ようこそ、ながのCAKEへ！
+        <br>
+        このサイトは、ケーキ販売のECサイトになります。
+        <br>
+        会員でない方も商品の閲覧はできますが、
+        <br>
+        購入には会員登録が必要となります。
+      </p>
+    </div>
+  </div>
+
+  <div id="new_items" class="p-3">
+    <h2>新着商品</h2>
+    <%= render "public/items/index", items: @items %>
+    <p class="text-end mt-3">
+      <%= link_to "すべての商品を見る", items_path %>
+    </p>
+  </div>
+</div>
+

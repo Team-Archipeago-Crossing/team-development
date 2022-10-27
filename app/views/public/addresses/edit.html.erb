@@ -1,0 +1,30 @@
+<% content_for :title, "配送先編集" %>
+<div class='container'>
+  <div class='row'>
+    <div class='col-8 pb-3 mt-3'>
+    <h3 class="bg-light border px-3 mb-3 d-inline-block">配送先編集</h3>
+    <div class="text-danger">
+      <%= flash[:alret] %>
+    </div>
+  <%= form_with model: @address, url: address_path, method: :patch do |f| %>
+  <table class="table table-borderless text-nowrap">
+    <tr>
+      <td>郵便番号(ハイフンなし)</td>
+      <td><%= f.text_field :postal_code %></td>
+    </tr>
+    <tr>
+      <td>住所</td>
+      <td><%= f.text_field :address, size: "60" %></td>
+    </tr>
+    <tr>
+      <td>宛名</td>
+      <td><%= f.text_field :name %>
+      <td>
+        <div class="text-right">
+          <%= f.submit "変更内容を保存",class: 'btn btn-success' %></td>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <% end %>
+</div>

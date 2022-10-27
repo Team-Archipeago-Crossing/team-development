@@ -1,0 +1,47 @@
+<% content_for :title, "注文履歴一覧" %>
+<div class="mx-auto p-3">
+	<h3 class="bg-light border px-3 mb-3 d-inline-block">注文履歴一覧</h3>
+	<table class="table w-100 table-bordered">
+		<thead>
+			<tr>
+				<th class="text-center align-middle bg-light">注文日</th>
+				<th class="text-center align-middle bg-light">配送先</th>
+				<th class="text-center align-middle bg-light">注文商品</th>
+				<th class="text-center align-middle bg-light">支払金額</th>
+				<th class="text-center align-middle bg-light">ステータス</th>
+				<th class="text-center align-middle bg-light">注文詳細</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @orders.each do |order| %>
+				<tr>
+					<td class="text-center align-middle">
+						<%= order.created_at.localtime("+09:00").strftime("%Y年%-m月%-d日")  %>
+					</td>
+					<td class="text-left align-middle">
+						〒<%= order.postal_code %>
+						<br>
+						<%= order.address %>
+						<br>
+						<%= order.name %>
+					</td>
+					<td class="text-center align-middle">
+						<% order.order_details.each do |detail| %>
+							<%= detail.item.name %>
+							<br>
+						<% end %>
+					</td>
+					<td class="text-end align-middle">
+						<%= price(order.total_payment) %>
+					</td>
+					<td class="text-center align-middle">
+						<%= order.status_i18n %>
+					</td>
+					<td class="text-center align-middle">
+						<%= link_to "表示", order_path(order.id), class: "btn btn-primary" %>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>

@@ -1,0 +1,67 @@
+<% content_for :title, "ショッピングカート" %>
+<div class='container mt-3'>
+  <div class='row'>
+    <div class='col-9 d-flex mb-3 align-items-center'>
+      <h2 class="bg-light border px-3 m-0 d-inline-block">ショッピングカート</h2>
+        <h5 class="text-success d-inline-block mx-2 my-0 p-1 success_message" style="visibility: hidden;"></h5>
+    </div>
+    <% if @cart_items.present? %>
+      <div class='col-3 text-end destroy_all'>
+        <%= link_to 'カートを空にする', destroy_all_cart_items_path, class: "btn btn-danger text-nowrap", method: :delete, remote: true %>
+      </div>
+      <div class="items_list">
+        <table class="table table-bordered table-condensed align-middle text-nowrap">
+          <thead class="table-light text-center">
+            <tr>
+              <th colspan="2">商品名</th>
+              <th>単価 (税込)</th>
+              <th>数量</th>
+              <th>小計</th>
+              <th></th>
+            </tr>
+          </thead>
+          <% @cart_items.each do |cart_item| %>
+            <tr class="cart_item_<%= cart_item.item.id %>">
+              <td style="border-right: none; width: 10%;">
+                <%= image_tag cart_item.item.get_item_image, height: "60" %>
+              </td>
+              <td class="text-center text-wrap" style="border-left: none;">
+                <%= cart_item.item.name %>
+              </td>
+              <td class="text-end"><%= price_taxin(cart_item.item.price) %></td>
+                <td class="change_amount text-center">
+                  <%= form_with model: cart_item, url: cart_item_path(cart_item.id), method: :patch, local: false, class: "d-flex" do |f| %>
+                    <%= f.select :amount, [*1..10], {}, class: "form-select mx-auto" %>
+                    <%= f.submit "変更",  class: "btn btn-success ms-2 mx-auto" %>
+                  <% end %>
+                </td>
+                <td class="subtotal text-end"><%= price(cart_item.subtotal) %></td>
+              <td class="text-center"><%= link_to '削除する', cart_item_path(cart_item.id), class: "btn btn-danger", remote: true, method: :delete %></td>
+            </tr>
+          <% end %>
+        </table>
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <%= link_to '買い物を続ける',root_path, class: "btn btn-primary" %>
+          </div>
+          <div>
+            <table class="table table-bordered m-0">
+              <tr>
+                <th class="text-center">合計金額</td>
+                <td class="total_payment text-end"><%= price(@subtotal) %></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="text-center my-2">
+          <%= link_to '情報入力に進む', new_order_path, class: "btn btn-success btn-lg" %>
+        </div>
+      </div>
+    <% else %>
+      <div class='container'>
+        <%= render "no_items" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

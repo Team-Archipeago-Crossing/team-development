@@ -1,0 +1,17 @@
+	<table class="table table-bordered caption-top align-middle text-nowrap">
+		<caption>注文内容</caption>
+		<thead>
+			<tr>
+				<th class="text-center bg-light">商品名</th>
+				<th class="text-center bg-light">単価 (税込)</th>
+				<th class="text-center bg-light">数量</th>
+				<th class="text-center bg-light">小計</th>
+				<% if @update %>
+					<th class="making_status text-center bg-light">製作ステータス</td>
+				<% end %>
+			</tr>
+		</thead>
+		<tbody class="order_detail">
+			<%= render "admin/orders/order_detail_statuses_selector", items: items %>
+		</tbody>
+	</table>

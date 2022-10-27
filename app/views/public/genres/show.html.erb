@@ -1,0 +1,10 @@
+<% content_for :title, "ジャンル検索" %>
+<%= render "public/homes/sidebar" %>
+<div class="p-3 col-9">
+  <div class="d-flex align-items-end">
+    <h2><%= Genre.find(params[:id]).name %>一覧</h2>
+    <h6>（全 <%= @items.length %> 件）</h6>
+  </div>
+  <%= render "public/items/index", items: @items.page(params[:page]) %>
+  <%= paginate @items.page(params[:page]) %>
+</div>

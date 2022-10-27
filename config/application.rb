@@ -10,7 +10,7 @@ module WorkGithub
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
-
+    
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -18,5 +18,13 @@ module WorkGithub
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    
+    #app/config/locales/ja.ymlの読み込み
+    config.i18n.default_locale = :ja
+    #config/locals配下にある全てのymlファイルを読み込む
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml').to_s]
+    
+    #timestamp日本時間にするため追加
+    config.time_zone = 'Tokyo'
   end
 end

@@ -1,0 +1,25 @@
+var error_class = "border border-danger border-3 rounded-3";
+
+
+$(".select_payment_method").<%= @payment_method_unchecked ? "addClass" : "removeClass" %>(error_class);
+
+$(".select_address").<%= @select_address_unchecked ? "addClass" : "removeClass" %>(error_class)
+
+$(".addresses_list").<%= @addresses_list_incorrect ? "addClass" : "removeClass" %>(error_class)
+
+$(".postal_code_form").<%= @postal_code_incorrect ? "addClass" : "removeClass" %>(error_class)
+
+$(".address_form").<%= @address_blank ? "addClass" : "removeClass" %>(error_class)
+
+$(".name_form").<%= @name_blank ? "addClass" : "removeClass" %>(error_class)
+
+$(".error_message").html("<%= @validate ? "入力に誤りがあります" : "" %>")
+
+
+<% unless @validate %>
+
+	$(".order_info_forms").attr("data-remote", false)
+	
+	$("input[type='submit'].submit").trigger("click");
+	
+<% end %>

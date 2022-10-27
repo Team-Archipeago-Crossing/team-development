@@ -1,0 +1,46 @@
+<% content_for :title, "注文詳細" %>
+<div class="mx-auto py-3 px-5 w-100">
+	<h3 class="bg-light border px-3 mb-3 d-inline-block">注文履歴詳細</h3>
+	<div class="d-flex">
+		<div class="col-8 ">
+			<table class="table caption-top table-bordered">
+			<caption>注文情報</caption>
+			<tbody>
+				<tr>
+					<th class="text-center align-middle bg-light">注文日</th>
+					<td class="text-center align-middle">
+						<%= @order.created_at.localtime("+09:00").strftime("%Y年%-m月%-d日")  %>
+					</td>
+				</tr>
+				<tr>
+					<th class="text-center align-middle bg-light">配送先</th>
+					<td class="text-left align-middle">
+						〒<%= @order.postal_code %>
+						<br>
+						<%= @order.address %>
+						<br>
+						<%= @order.name %>
+					</td>
+				</tr>
+				<tr>
+					<th class="text-center align-middle bg-light">支払方法</th>
+					<td class="text-center align-middle">
+						<%= @order.payment_method_i18n %>
+					</td>
+				</tr>
+					<th class="text-center align-middle bg-light">ステータス</th>
+					<td class="text-center align-middle">
+						<%= @order.status_i18n %>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+		<div class="col-3 offset-1">
+			<%= render "total_payment" %>
+		</div>
+	</div>
+	<div class="col-8">
+		<%= render "order_detail", items: @order.order_details %>
+	</div>
+</div>

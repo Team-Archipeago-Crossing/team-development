@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-7">
+      <div class="my-4">
+        <h4 class="col-3 bg-light text-center">ログイン</h4>
+        <div class="text-danger">
+          <%= flash[:alert] %>
+        </div>
+      </div>
+      <div class="m-4 p-2">
+        <h6 class="col-5 bg-light text-center">会員の方はこちらからログイン</h6>
+        <div class="mx-5 my-3">
+          <%= form_with model: @customer, url: customer_session_path, local: true do |f| %>
+            <table class="table table-borderless text-nowrap">
+              <tr>
+                <th class="w-25"><%= f.label :email, "メールアドレス" %></th>
+                <td><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", class: 'form-control w-100' %></td>
+              </tr>
+              <tr>
+                <th><%= f.label :password, "パスワード" %></th>
+                <td><%= f.password_field :password, autocomplete: "current-password", class: 'form-control w-100' %></td>
+              </tr>
+            </table>
+            <div class="actions m-4 text-center">
+              <%= f.submit "ログイン", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="m-4 p-2 text-center">
+        <h6 class="col-5 bg-light text-center">会員登録がお済みでない方</h6>
+        <p><%= render "public/shared/links" %>から新規登録を行なってください</p>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
